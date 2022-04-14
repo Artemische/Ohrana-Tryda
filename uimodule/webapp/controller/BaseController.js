@@ -3,12 +3,12 @@ sap.ui.define(
         "sap/ui/core/mvc/Controller",
         "sap/ui/core/routing/History",
         "sap/ui/core/UIComponent",
-        "bnnu/ohranaTryda/model/formatter"
+        "bntu/ohranaTryda/model/formatter"
     ],
     function (Controller, History, UIComponent, formatter) {
         "use strict";
 
-        return Controller.extend("bnnu.ohranaTryda.controller.BaseController", {
+        return Controller.extend("bntu.ohranaTryda.controller.BaseController", {
             formatter: formatter,
 
             /**

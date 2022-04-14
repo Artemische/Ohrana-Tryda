@@ -1,7 +1,7 @@
 {
   "_version": "1.21.0",
   "sap.app": {
-    "id": "bnnu.ohranaTryda",
+    "id": "bntu.ohranaTryda",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -29,7 +29,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "rootView": {
-      "viewName": "bnnu.ohranaTryda.view.MainView",
+      "viewName": "bntu.ohranaTryda.view.App",
       "type": "XML",
       "async": true,
       "id": "idAppControl"
@@ -50,7 +50,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "bnnu.ohranaTryda.i18n.i18n"
+          "bundleName": "bntu.ohranaTryda.i18n.i18n"
         }
       }
     },
@@ -65,7 +65,7 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
-        "viewPath": "bnnu.ohranaTryda.view",
+        "viewPath": "bntu.ohranaTryda.view",
         "controlId": "idAppControl",
         "controlAggregation": "pages",
         "async": true
@@ -73,7 +73,7 @@
       "routes": [
         {
           "name": "RouteMainView",
-          "pattern": "RouteMainView",
+          "pattern": "",
           "target": ["TargetMainView"]
         }
       ],
@@ -81,8 +81,8 @@
         "TargetMainView": {
           "viewType": "XML",
           "viewLevel": 1,
-          "viewId": "idAppControl",
-          "viewName": "MainView"
+          "viewId": "dynamicPageId",
+          "viewName": "ListReport"
         }
       }
     }

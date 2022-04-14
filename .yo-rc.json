@@ -1,12 +1,12 @@
 {
   "generator-template-ui5-project": {
     "projectname": "ohranaTryda",
-    "namespaceUI5": "bnnu",
+    "namespaceUI5": "bntu",
     "platform": "Application Router @ Cloud Foundry",
     "viewtype": "XML",
     "ui5libs": "Content delivery network (SAPUI5)",
     "newdir": false,
-    "namespaceURI": "bnnu",
+    "namespaceURI": "bntu",
     "opa5pos": [
       "Main"
     ],

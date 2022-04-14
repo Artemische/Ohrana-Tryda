@@ -4,7 +4,7 @@ sap.ui.require([
 ], function (Opa5, Press) {
   "use strict";
 
-  var sViewName = "bnnu.ohranaTryda.view.MainView";
+  var sViewName = "bntu.ohranaTryda.view.MainView";
 
   Opa5.createPageObjects({
     onTheMainPage: {
@@ -27,12 +27,12 @@ sap.ui.require([
             return this.waitFor({
               controlType: "sap.m.Title",
               properties: {
-                text: "bnnu.ohranaTryda"
+                text: "bntu.ohranaTryda"
               },
               success: function() {
                 Opa5.assert.ok(true, "The page shows the correct title");
               },
-              errorMessage: "App does not show the expected title bnnu.ohranaTryda"
+              errorMessage: "App does not show the expected title bntu.ohranaTryda"
             });
         }
       }

@@ -1,9 +1,9 @@
 sap.ui.define(
-    ["sap/ui/core/UIComponent", "sap/ui/Device", "bnnu/ohranaTryda/model/models"],
+    ["sap/ui/core/UIComponent", "sap/ui/Device", "bntu/ohranaTryda/model/models"],
     function (UIComponent, Device, models) {
         "use strict";
 
-        return UIComponent.extend("bnnu.ohranaTryda.Component", {
+        return UIComponent.extend("bntu.ohranaTryda.Component", {
             metadata: {
                 manifest: "json"
             },
