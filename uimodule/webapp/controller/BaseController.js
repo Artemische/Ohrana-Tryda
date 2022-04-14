@@ -3,9 +3,10 @@ sap.ui.define(
         "sap/ui/core/mvc/Controller",
         "sap/ui/core/routing/History",
         "sap/ui/core/UIComponent",
-        "bntu/ohranaTryda/model/formatter"
+        "bntu/ohranaTryda/model/formatter",
+        "../Firebase"
     ],
-    function (Controller, History, UIComponent, formatter) {
+    function (Controller, History, UIComponent, formatter, Firebase) {
         "use strict";
 
         return Controller.extend("bntu.ohranaTryda.controller.BaseController", {
@@ -64,7 +65,23 @@ sap.ui.define(
                 } else {
                     this.getRouter().navTo("appHome", {}, true /*no history*/);
                 }
-            }
+            },
+            
+            async readBaseRequest(sPath) {
+                return await Firebase.handleOnceMethod(sPath);
+            },
+
+            createBaseRequest(sPath, oDoc) {
+                return Firebase.handleSetMethod(sPath, oDoc);
+            },
+
+            deleteBaseRequest(sPath) {
+                return Firebase.handleRemoveMethod(sPath);
+            },
+
+            updateBaseRequest(sPath, oDoc) {
+                return Firebase.handleUpdateMethod(sPath, oDoc);
+            },
         });
     }
 );
