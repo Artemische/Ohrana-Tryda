@@ -83,7 +83,7 @@ sap.ui.define([
                 }
             });
             
-            this.byId("idProductsTable").getBinding("items").filter(aFilters);
+            this.byId("usersTableId").getBinding("items").filter(aFilters);
         },
 
         _authenticateUser(oLoginCredentials) {
