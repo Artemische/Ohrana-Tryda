@@ -20,7 +20,6 @@ sap.ui.define([
 	return {
 
 		initializeFirebase() {
-			// Initialize Firebase with the Firebase-config
 			firebase.initializeApp(firebaseConfig);
             var db = firebase.database();
             var usersRef = db.ref("Users/");
@@ -31,15 +30,25 @@ sap.ui.define([
                 console.log("Error: " + error.code);
             });
             
-			// Return JSON Model
             return new JSONModel({
                 Users: [],
+                AvailableUsers: [],
+                ActiveUser: {
+                    department: "",
+                    isAdmin: false,
+                    lastAttestationDate: "",
+                    lastAttestationResult: "",
+                    mobilePhone: "",
+                    name: "",
+                    secondName: "",
+                    thirdName: "",
+                },
                 Questions: []
-            });            
+            });
 		},
 
         handleOnMethodSuccess(snapshotData) {
-            var fbModel = sap.ui.getCore().byId("container-ohranaTryda---idAppControl").getModel("fbModel");
+            var fbModel = sap.ui.getCore().byId("container-ohranaTryda---idAppControl").getModel();
             fbModel.setProperty("/Users", snapshotData);
         },
 

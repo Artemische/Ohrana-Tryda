@@ -27,8 +27,8 @@ sap.ui.define([
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
 
-                // set the firebase model by calling the initializeFirebase function in the Firebase.js file
-                this.setModel(Firebase.initializeFirebase(), "fbModel");
+                // set the firebase model by calling the initializeFirebase function
+                this.setModel(Firebase.initializeFirebase());
             }
         });
     }
