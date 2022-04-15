@@ -15,11 +15,11 @@
             columnsL="1"
             columnsM="1">
             <f:content>
-                <Label text="{i18n>loginNameField}" required="true"/>
-                <Input id="loginFirstNameId"/>
-
                 <Label text="{i18n>loginSecondField}" required="true"/>
                 <Input id="loginSecondNameId"/>
+
+                <Label text="{i18n>loginNameField}" required="true"/>
+                <Input id="loginFirstNameId"/>
 
                 <Label text="{i18n>loginThirdField}" required="true"/>
                 <Input id="loginThirdNameId"/>
