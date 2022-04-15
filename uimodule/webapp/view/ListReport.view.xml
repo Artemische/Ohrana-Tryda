@@ -5,7 +5,8 @@
     xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:fb="sap.ui.comp.filterbar"
-    xmlns:vm="sap.ui.comp.variants">
+    xmlns:vm="sap.ui.comp.variants"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
     <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" class="sapUiNoContentPadding">
         <!-- DynamicPage Title -->
         <f:title>
@@ -28,17 +29,17 @@
                         <fb:filterItems>
                             <fb:FilterItem name="A" label="{i18n>nameFltrLbl}">
                                 <fb:control>
-                                    <Input id="nameFltr" />
+                                    <Input id="nameFltr" app:prop="name" change="onFilterChange" />
                                 </fb:control>
                             </fb:FilterItem>
                             <fb:FilterItem name="B" label="{i18n>sNameFltrLbl}">
                                 <fb:control>
-                                    <Input id="secondNameFltr" />
+                                    <Input id="secondNameFltr" app:prop="secondName" change="onFilterChange" />
                                 </fb:control>
                             </fb:FilterItem>
                             <fb:FilterItem name="C" label="{i18n>departmentFltrLbl}">
                                 <fb:control>
-                                    <Select id="departmentFltr" change="onDepartmentFltrChange" forceSelection="false" items="{
+                                    <Select id="departmentFltr" app:prop="department" change="onFilterChange" forceSelection="false" items="{
                                             path: '/departments'
                                         }">
                                         <core:Item key="{key}" text="{name}"/>
@@ -76,12 +77,13 @@
                 </columns>
 
                 <items>
-                    <ColumnListItem vAlign="Middle">
+                    <ColumnListItem type="Navigation" vAlign="Middle">
                         <cells>
                             <Text text="{name}"/>
                             <Text text="{secondName}"/>
                             <Text text="{department}"/>
-                            <Text text="{lastAttestationResult}"/>
+                            <ObjectStatus text="{lastAttestationResult}" 
+                                state="{= ${lastAttestationResult} === 'Сдано' ? 'Success' : 'Error'}" />
                         </cells>
                     </ColumnListItem>
                 </items>
