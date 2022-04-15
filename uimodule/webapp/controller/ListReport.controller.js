@@ -1,9 +1,10 @@
 sap.ui.define([
-    "sap/ui/model/json/JSONModel",
     "bntu/ohranaTryda/controller/BaseController",
     "sap/ui/core/Fragment",
-    "sap/m/MessageBox"
-], function (JSONModel, Controller, Fragment, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/ui/model/Filter", 
+    "sap/ui/model/FilterOperator",
+], function (Controller, Fragment, MessageBox, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("bntu.ohranaTryda.controller.ListReport", {
@@ -68,6 +69,22 @@ sap.ui.define([
                 }
             })
         },
+      
+        onFilterChange() {
+            const aFilterItems = this.byId("filterbar").getFilterItems();
+            const aFilters = [];
+
+            aFilterItems.forEach( item => {
+                const oControl = item.getControl();
+                const sValue = oControl.getValue ? oControl.getValue() : oControl.getSelectedKey();
+
+                if (sValue) {
+                    aFilters.push(new Filter(oControl.data("prop"), FilterOperator.Contains, sValue));
+                }
+            });
+            
+            this.byId("idProductsTable").getBinding("items").filter(aFilters);
+        },
 
         _authenticateUser(oLoginCredentials) {
             const oModel = this.getModel();
@@ -95,8 +112,8 @@ sap.ui.define([
             const oUsers = oModel.getData().Users;
 
             return oUsers.find(oUser => oUser.name.toLowerCase() === oLoginUser.name.toLowerCase() && 
-                               oUser.secondName.toLowerCase() === oLoginUser.secondName.toLowerCase() &&
-                               oUser.thirdName.toLowerCase() === oLoginUser.thirdName.toLowerCase());
+                oUser.secondName.toLowerCase() === oLoginUser.secondName.toLowerCase() &&
+                oUser.thirdName.toLowerCase() === oLoginUser.thirdName.toLowerCase());
 
         },
 
