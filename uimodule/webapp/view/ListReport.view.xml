@@ -16,7 +16,7 @@
                 </f:heading>
                 <f:actions>
                     <ToolbarSpacer/>
-                    <Button text="Log In" type="Emphasized" press="openLoginDialog" />
+                    <Button text="{i18n>loginButton}" type="Emphasized" press="openLoginDialog" />
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>
@@ -57,7 +57,9 @@
                 inset="false" 
                 items="{
                     path: '/AvailableUsers'
-                }" class="sapUiMediumMarginTop" >
+                }" 
+                class="sapUiMediumMarginTop"
+                noDataText="{i18n>noUsersText}" >
                 <columns>
                     <Column minScreenWidth="Phone" demandPopin="true">
                         <Text text="{i18n>nameColumn}"/>
@@ -78,7 +80,7 @@
                         <cells>
                             <Text text="{name}"/>
                             <Text text="{secondName}"/>
-                            <Text text="{thirdName}"/>
+                            <Text text="{department}"/>
                             <Text text="{lastAttestationResult}"/>
                         </cells>
                     </ColumnListItem>
