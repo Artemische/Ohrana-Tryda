@@ -1,12 +1,21 @@
 sap.ui.define([
+    "sap/ui/model/json/JSONModel",
     "bntu/ohranaTryda/controller/BaseController",
     "sap/ui/core/Fragment",
-], function (Controller, Fragment) {
+    "sap/m/MessageBox"
+], function (JSONModel, Controller, Fragment, MessageBox) {
     "use strict";
 
     return Controller.extend("bntu.ohranaTryda.controller.ListReport", {
         
         onInit() {
+            const oCredentialsModel = new JSONModel({
+                name: "",
+                secondName: "",
+                thirdName: ""
+            });
+
+            this.getView().setModel(oCredentialsModel, "credentialsModel");
             this.openLoginDialog();
         },
 
@@ -39,18 +48,30 @@ sap.ui.define([
                     this.oLoginDialog = null;
                 });
             }
+
+            this._resetCredentialsModel();
         },
 
         onSignInPress() {
-            const sName = this.byId("loginFirstNameId").getValue();
-            const sSecondName = this.byId("loginSecondNameId").getValue();
-            const sThirdName = this.byId("loginThirdNameId").getValue();
+            const oCredentials = this.getModel("credentialsModel").getData();
             const oLoginCredentials = {
-                name: sName,
-                secondName: sSecondName,
-                thirdName: sThirdName
+                name: oCredentials.name,
+                secondName: oCredentials.secondName,
+                thirdName: oCredentials.thirdName
             };
             this._authenticateUser(oLoginCredentials);
+        },
+
+        handleLoginException() {
+            const sTitle = this.getResourceBundle().getText("loginErrorTitle");
+            const sErrorMessage = this.getResourceBundle().getText("loginErrorText");
+
+            MessageBox.error(sErrorMessage, {
+                title: sTitle,
+                onClose: () => {
+                    this._resetCredentialsModel();
+                }
+            })
         },
 
         _authenticateUser(oLoginCredentials) {
@@ -62,8 +83,7 @@ sap.ui.define([
                 this._setAvailableUsers();
                 this.closeLoginDialog();
             } else {
-                debugger
-                // handle user doesn't exist
+                this.handleLoginException();
             }
         },
 
@@ -84,5 +104,13 @@ sap.ui.define([
                                oUser.thirdName.toLowerCase() === oLoginUser.thirdName.toLowerCase());
 
         },
+
+        _resetCredentialsModel() {
+            const oCredentialsModel = this.getModel("credentialsModel");
+
+            oCredentialsModel.setProperty("/name", "");
+            oCredentialsModel.setProperty("/secondName", "");
+            oCredentialsModel.setProperty("/thirdName", "");
+        }
     });
 });
