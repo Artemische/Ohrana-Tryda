@@ -9,13 +9,6 @@ sap.ui.define([
     return Controller.extend("bntu.ohranaTryda.controller.ListReport", {
         
         onInit() {
-            const oCredentialsModel = new JSONModel({
-                name: "",
-                secondName: "",
-                thirdName: ""
-            });
-
-            this.getView().setModel(oCredentialsModel, "credentialsModel");
             this.openLoginDialog();
         },
 
@@ -53,11 +46,13 @@ sap.ui.define([
         },
 
         onSignInPress() {
-            const oCredentials = this.getModel("credentialsModel").getData();
+            var sName = this.byId("loginFirstNameId").getValue();
+            var sSecondName = this.byId("loginSecondNameId").getValue();
+            var sThirdName = this.byId("loginThirdNameId").getValue();
             const oLoginCredentials = {
-                name: oCredentials.name,
-                secondName: oCredentials.secondName,
-                thirdName: oCredentials.thirdName
+                name: sName,
+                secondName: sSecondName,
+                thirdName: sThirdName
             };
             this._authenticateUser(oLoginCredentials);
         },
@@ -96,8 +91,8 @@ sap.ui.define([
         },
 
         _verifyLoginUserExist(oLoginUser) {
-            const oFbWsResponseModel = this.getModel();
-            const oUsers = oFbWsResponseModel.getData().Users;
+            const oModel = this.getModel();
+            const oUsers = oModel.getData().Users;
 
             return oUsers.find(oUser => oUser.name.toLowerCase() === oLoginUser.name.toLowerCase() && 
                                oUser.secondName.toLowerCase() === oLoginUser.secondName.toLowerCase() &&
@@ -106,11 +101,9 @@ sap.ui.define([
         },
 
         _resetCredentialsModel() {
-            const oCredentialsModel = this.getModel("credentialsModel");
-
-            oCredentialsModel.setProperty("/name", "");
-            oCredentialsModel.setProperty("/secondName", "");
-            oCredentialsModel.setProperty("/thirdName", "");
-        }
+            this.byId("loginFirstNameId").setValue("");
+            this.byId("loginSecondNameId").setValue("");
+            this.byId("loginThirdNameId").setValue("");
+        },
     });
 });
