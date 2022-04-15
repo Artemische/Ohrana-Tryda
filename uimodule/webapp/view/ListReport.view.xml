@@ -6,19 +6,17 @@
     xmlns:f="sap.f"
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:vm="sap.ui.comp.variants">
-    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" class="sapUiNoContentPadding">
         <!-- DynamicPage Title -->
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <vm:VariantManagement standardItemText="My Products">
+                    <vm:VariantManagement standardItemText="{i18n>variantDefaultTxt}">
                     </vm:VariantManagement>
                 </f:heading>
                 <f:actions>
                     <ToolbarSpacer/>
-                    <Button text="Global Action" type="Transparent"/>
-                    <Button text="Toggle Footer" type="Transparent" press="onToggleFooter"/>
-                    <Button icon="sap-icon://action" type="Transparent"/>
+                    <Button text="Log In" type="Emphasized" press="openLoginDialog" />
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>
@@ -26,31 +24,23 @@
         <f:header>
             <f:DynamicPageHeader pinnable="true">
                 <f:content>
-                    <fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+                    <fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="true">
                         <fb:filterItems>
-                            <fb:FilterItem name="A" label="Name">
+                            <fb:FilterItem name="A" label="{i18n>nameFltrLbl}">
                                 <fb:control>
-                                    <Select id="slName" forceSelection="true" change="onSelectChange" items="{
-                                                    path: '/ProductNames'
-                                                }">
-                                        <core:Item key="{key}" text="{name}"/>
-                                    </Select>
+                                    <Input id="nameFltr" />
                                 </fb:control>
                             </fb:FilterItem>
-                            <fb:FilterItem name="B" label="Category">
+                            <fb:FilterItem name="B" label="{i18n>sNameFltrLbl}">
                                 <fb:control>
-                                    <Select id="slCategory" change="onSelectChange" forceSelection="true" items="{
-                                                    path: '/ProductCategories'
-                                                 }">
-                                        <core:Item key="{key}" text="{name}"/>
-                                    </Select>
+                                    <Input id="secondNameFltr" />
                                 </fb:control>
                             </fb:FilterItem>
-                            <fb:FilterItem name="C" label="SupplierName">
+                            <fb:FilterItem name="C" label="{i18n>departmentFltrLbl}">
                                 <fb:control>
-                                    <Select id="slSupplierName" change="onSelectChange" forceSelection="true" items="{
-                                                    path: '/ProductSuppliers'
-                                                }">
+                                    <Select id="departmentFltr" change="onDepartmentFltrChange" forceSelection="false" items="{
+                                            path: '/departments'
+                                        }">
                                         <core:Item key="{key}" text="{name}"/>
                                     </Select>
                                 </fb:control>
@@ -63,19 +53,23 @@
 
         <!-- DynamicPage Content -->
         <f:content>
-            <Table id="idProductsTable" inset="false" items="{
-                            path: '/ProductCollection'
-                        }">
-
+            <Table id="idProductsTable" 
+                inset="false" 
+                items="{
+                    path: '/ProductCollection'
+                }" class="sapUiMediumMarginTop" >
                 <columns>
                     <Column minScreenWidth="Tablet" demandPopin="true">
-                        <Text text="Name"/>
+                        <Text text="{i18n>nameColumn}"/>
                     </Column>
                     <Column minScreenWidth="Tablet" demandPopin="true">
-                        <Text text="Category"/>
+                        <Text text="{i18n>sNameColumn}"/>
                     </Column>
                     <Column minScreenWidth="Tablet" demandPopin="true">
-                        <Text text="SupplierName"/>
+                        <Text text="{i18n>departmentColumn}"/>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="{i18n>atestationColumn}"/>
                     </Column>
                 </columns>
 

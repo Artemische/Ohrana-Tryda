@@ -1,10 +1,9 @@
 sap.ui.define([
     "sap/ui/core/UIComponent", 
-    "sap/ui/Device", 
     "bntu/ohranaTryda/model/models",
     "./Firebase"
     ], 
-    function (UIComponent, Device, models, Firebase) {
+    function (UIComponent, models, Firebase) {
         "use strict";
 
         return UIComponent.extend("bntu.ohranaTryda.Component", {
