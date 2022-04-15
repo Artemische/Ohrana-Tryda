@@ -54,7 +54,7 @@
 
         <!-- DynamicPage Content -->
         <f:content>
-            <Table id="idProductsTable" 
+            <Table id="usersTableId" 
                 inset="false" 
                 items="{
                     path: '/AvailableUsers'

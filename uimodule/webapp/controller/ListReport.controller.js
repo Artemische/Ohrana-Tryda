@@ -1,9 +1,10 @@
 sap.ui.define([
     "bntu/ohranaTryda/controller/BaseController",
     "sap/ui/core/Fragment",
+    "sap/m/MessageBox",
     "sap/ui/model/Filter", 
-	"sap/ui/model/FilterOperator",
-], function (Controller, Fragment, Filter, FilterOperator) {
+    "sap/ui/model/FilterOperator",
+], function (Controller, Fragment, MessageBox, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("bntu.ohranaTryda.controller.ListReport", {
@@ -41,12 +42,14 @@ sap.ui.define([
                     this.oLoginDialog = null;
                 });
             }
+
+            this._resetCredentialsModel();
         },
 
         onSignInPress() {
-            const sName = this.byId("loginFirstNameId").getValue();
-            const sSecondName = this.byId("loginSecondNameId").getValue();
-            const sThirdName = this.byId("loginThirdNameId").getValue();
+            var sName = this.byId("loginFirstNameId").getValue();
+            var sSecondName = this.byId("loginSecondNameId").getValue();
+            var sThirdName = this.byId("loginThirdNameId").getValue();
             const oLoginCredentials = {
                 name: sName,
                 secondName: sSecondName,
@@ -55,6 +58,18 @@ sap.ui.define([
             this._authenticateUser(oLoginCredentials);
         },
 
+        handleLoginException() {
+            const sTitle = this.getResourceBundle().getText("loginErrorTitle");
+            const sErrorMessage = this.getResourceBundle().getText("loginErrorText");
+
+            MessageBox.error(sErrorMessage, {
+                title: sTitle,
+                onClose: () => {
+                    this._resetCredentialsModel();
+                }
+            })
+        },
+      
         onFilterChange() {
             const aFilterItems = this.byId("filterbar").getFilterItems();
             const aFilters = [];
@@ -80,8 +95,7 @@ sap.ui.define([
                 this._setAvailableUsers();
                 this.closeLoginDialog();
             } else {
-                debugger
-                // handle user doesn't exist
+                this.handleLoginException();
             }
         },
 
@@ -94,13 +108,19 @@ sap.ui.define([
         },
 
         _verifyLoginUserExist(oLoginUser) {
-            const oFbWsResponseModel = this.getModel();
-            const oUsers = oFbWsResponseModel.getData().Users;
+            const oModel = this.getModel();
+            const oUsers = oModel.getData().Users;
 
             return oUsers.find(oUser => oUser.name.toLowerCase() === oLoginUser.name.toLowerCase() && 
                 oUser.secondName.toLowerCase() === oLoginUser.secondName.toLowerCase() &&
                 oUser.thirdName.toLowerCase() === oLoginUser.thirdName.toLowerCase());
 
+        },
+
+        _resetCredentialsModel() {
+            this.byId("loginFirstNameId").setValue("");
+            this.byId("loginSecondNameId").setValue("");
+            this.byId("loginThirdNameId").setValue("");
         },
     });
 });
