@@ -7,5 +7,23 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
             oModel.setDefaultBindingMode("OneWay");
             return oModel;
         },
+
+        createFbModel() {
+            return new JSONModel({
+                Users: [],
+                AvailableUsers: [],
+                ActiveUser: {
+                    department: "",
+                    isAdmin: false,
+                    lastAttestationDate: "",
+                    lastAttestationResult: "",
+                    mobilePhone: "",
+                    name: "",
+                    secondName: "",
+                    thirdName: "",
+                },
+                Questions: []
+            });
+        }
     };
 });

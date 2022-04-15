@@ -12,6 +12,7 @@ sap.ui.define([
 
         openLoginDialog() {
             const oView = this.getView();
+
             if (!this.oLoginDialog) {
                 this.oLoginDialog = Fragment.load({
                     id: oView.getId(),
@@ -37,20 +38,22 @@ sap.ui.define([
         },
 
         onSignInPress() {
-            const oActiveUser = this.getView().getModel().getProperty("/ActiveUser");
+            const oActiveUser = this.getModel().getProperty("/ActiveUser");
             const oLoginCredentials = {
                 name: oActiveUser.name,
                 secondName: oActiveUser.secondName,
                 thirdName: oActiveUser.thirdName
             };
+
             this._authenticateUser(oLoginCredentials);
         },
 
         _authenticateUser(oLoginCredentials) {
-            const oLocalModel = this.getView().getModel();
+            const oModel = this.getModel();
             const oExistingUser = this._verifyLoginUserExist(oLoginCredentials);
+
             if (oExistingUser) {
-                oLocalModel.setProperty("/ActiveUser", oExistingUser);
+                oModel.setProperty("/ActiveUser", oExistingUser);
                 this._setAvailableUsers();
             } else {
                 debugger
@@ -59,18 +62,17 @@ sap.ui.define([
         },
 
         _setAvailableUsers() {
-            const oLocalModel = this.getView().getModel();
-            const bActiveUserIsAdmin = oLocalModel.getProperty("/ActiveUser/isAdmin");
-            if (bActiveUserIsAdmin) {
-                oLocalModel.setProperty("/AvailableUsers", oLocalModel.getProperty("/Users"));
-            } else {
-                oLocalModel.setProperty("/AvailableUsers", oLocalModel.getProperty("/ActiveUser"));
-            }
+            const oModel = this.getModel();
+            const bActiveUserIsAdmin = oModel.getProperty("/ActiveUser/isAdmin");
+            const sProperty = bActiveUserIsAdmin ? "/Users" : "/ActiveUser";
+
+            oModel.setProperty("/AvailableUsers", [].concat(oModel.getProperty(sProperty)));
         },
 
         _verifyLoginUserExist(oLoginUser) {
-            const oFbWsResponseModel = this.getView().getModel();
+            const oFbWsResponseModel = this.getModel();
             const oUsers = oFbWsResponseModel.getData().Users;
+
             return oUsers.find(oUser => oUser.name.toLowerCase() === oLoginUser.name.toLowerCase() && 
                                oUser.secondName.toLowerCase() === oLoginUser.secondName.toLowerCase() &&
                                oUser.thirdName.toLowerCase() === oLoginUser.thirdName.toLowerCase());

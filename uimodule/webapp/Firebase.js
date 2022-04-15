@@ -21,40 +21,24 @@ sap.ui.define([
 
 		initializeFirebase() {
 			firebase.initializeApp(firebaseConfig);
-            var db = firebase.database();
-            var usersRef = db.ref("Users/");
+            const db = firebase.database();
+            const usersRef = db.ref("Users/");
 
             usersRef.on("value", snapshot => {
                 this.handleOnMethodSuccess(snapshot.val());
             }, error => {
                 console.log("Error: " + error.code);
             });
-            
-            return new JSONModel({
-                Users: [],
-                AvailableUsers: [],
-                ActiveUser: {
-                    department: "",
-                    isAdmin: false,
-                    lastAttestationDate: "",
-                    lastAttestationResult: "",
-                    mobilePhone: "",
-                    name: "",
-                    secondName: "",
-                    thirdName: "",
-                },
-                Questions: []
-            });
 		},
 
         handleOnMethodSuccess(snapshotData) {
-            var fbModel = sap.ui.getCore().byId("container-ohranaTryda---idAppControl").getModel();
+            const fbModel = sap.ui.getCore().byId("container-ohranaTryda---idAppControl").getModel();
             fbModel.setProperty("/Users", snapshotData);
         },
 
         async handleOnceMethod(path) {
-            var ref = firebase.database().ref(path);
-            var snapshot = await ref.once("value");
+            const ref = firebase.database().ref(path);
+            const snapshot = await ref.once("value");
             if (snapshot.exists()) {
                 return snapshot.val();
             } else {
@@ -63,18 +47,18 @@ sap.ui.define([
         },
 
         handleSetMethod(path, doc) {
-            var ref = firebase.database().ref(path);
+            const ref = firebase.database().ref(path);
             ref.set(doc);
         },
 
         handleRemoveMethod(path) {
-            var ref = firebase.database().ref(path);
+            const ref = firebase.database().ref(path);
             ref.remove();
         },
 
         handleUpdateMethod(path, doc) {
-            var updates = {};
-            var ref = firebase.database().ref();
+            const updates = {};
+            const ref = firebase.database().ref();
             updates[path] = doc;
             ref.update(updates);
         }
