@@ -29,6 +29,10 @@ sap.ui.define([
         },
 
         onCancelPress() {
+            this.closeLoginDialog();
+        },
+
+        closeLoginDialog() {
             if (this.oLoginDialog) {
                 this.oLoginDialog.then(oLoginDialog => {
                     oLoginDialog.close().destroy();
@@ -38,13 +42,14 @@ sap.ui.define([
         },
 
         onSignInPress() {
-            const oActiveUser = this.getModel().getProperty("/ActiveUser");
+            const sName = this.byId("loginFirstNameId").getValue();
+            const sSecondName = this.byId("loginSecondNameId").getValue();
+            const sThirdName = this.byId("loginThirdNameId").getValue();
             const oLoginCredentials = {
-                name: oActiveUser.name,
-                secondName: oActiveUser.secondName,
-                thirdName: oActiveUser.thirdName
+                name: sName,
+                secondName: sSecondName,
+                thirdName: sThirdName
             };
-
             this._authenticateUser(oLoginCredentials);
         },
 
@@ -55,6 +60,7 @@ sap.ui.define([
             if (oExistingUser) {
                 oModel.setProperty("/ActiveUser", oExistingUser);
                 this._setAvailableUsers();
+                this.closeLoginDialog();
             } else {
                 debugger
                 // handle user doesn't exist

@@ -56,10 +56,10 @@
             <Table id="idProductsTable" 
                 inset="false" 
                 items="{
-                    path: '/ProductCollection'
+                    path: '/AvailableUsers'
                 }" class="sapUiMediumMarginTop" >
                 <columns>
-                    <Column minScreenWidth="Tablet" demandPopin="true">
+                    <Column minScreenWidth="Phone" demandPopin="true">
                         <Text text="{i18n>nameColumn}"/>
                     </Column>
                     <Column minScreenWidth="Tablet" demandPopin="true">
@@ -68,7 +68,7 @@
                     <Column minScreenWidth="Tablet" demandPopin="true">
                         <Text text="{i18n>departmentColumn}"/>
                     </Column>
-                    <Column minScreenWidth="Tablet" demandPopin="true">
+                    <Column minScreenWidth="Phone" demandPopin="true">
                         <Text text="{i18n>atestationColumn}"/>
                     </Column>
                 </columns>
@@ -76,9 +76,10 @@
                 <items>
                     <ColumnListItem vAlign="Middle">
                         <cells>
-                            <ObjectIdentifier title="{Name}" text="{ProductId}"/>
-                            <Text text="{Category}"/>
-                            <Text text="{SupplierName}"/>
+                            <Text text="{name}"/>
+                            <Text text="{secondName}"/>
+                            <Text text="{thirdName}"/>
+                            <Text text="{lastAttestationResult}"/>
                         </cells>
                     </ColumnListItem>
                 </items>

@@ -34,6 +34,7 @@
       "async": true,
       "id": "idAppControl"
     },
+    "handleValidation": true,
     "dependencies": {
       "minUI5Version": "1.60.0",
       "libs": {
