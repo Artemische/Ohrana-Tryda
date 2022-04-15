@@ -31,8 +31,46 @@ sap.ui.define([
             });
         },
 
-        onCancelPress() {
+        onLoginCancelPress() {
             this.closeLoginDialog();
+        },
+
+        onCreateCancelPress() {
+            this.closeCreateUserDialog();
+        },
+
+        onCreateUserPress() {
+            const oView = this.getView();
+
+            if (!this.oCreateUserDialog) {
+                this.oCreateUserDialog = Fragment.load({
+                    id: oView.getId(),
+                    name: "bntu.ohranaTryda.view.fragments.CreateUser",
+                    controller: this
+                }).then(oCreateUserDialog => {
+                    oView.addDependent(oCreateUserDialog);
+                    return oCreateUserDialog;
+                });
+            }
+            this.oCreateUserDialog.then(oCreateUserDialog => {
+                oCreateUserDialog.open();
+            });
+        },
+
+        onSignInPress() {
+            var sName = this.byId("loginFirstNameFieldId").getValue();
+            var sSecondName = this.byId("loginSecondNameFieldId").getValue();
+            var sThirdName = this.byId("loginThirdNameFieldId").getValue();
+            const oLoginCredentials = {
+                name: sName,
+                secondName: sSecondName,
+                thirdName: sThirdName
+            };
+            this._authenticateUser(oLoginCredentials);
+        },
+
+        onSubmitPress() {
+
         },
 
         closeLoginDialog() {
@@ -42,20 +80,15 @@ sap.ui.define([
                     this.oLoginDialog = null;
                 });
             }
-
-            this._resetCredentialsModel();
         },
 
-        onSignInPress() {
-            var sName = this.byId("loginFirstNameId").getValue();
-            var sSecondName = this.byId("loginSecondNameId").getValue();
-            var sThirdName = this.byId("loginThirdNameId").getValue();
-            const oLoginCredentials = {
-                name: sName,
-                secondName: sSecondName,
-                thirdName: sThirdName
-            };
-            this._authenticateUser(oLoginCredentials);
+        closeCreateUserDialog() {
+            if (this.oCreateUserDialog) {
+                this.oCreateUserDialog.then(oCreateUserDialog => {
+                    oCreateUserDialog.close().destroy();
+                    this.oCreateUserDialog = null;
+                });
+            }
         },
 
         handleLoginException() {
@@ -118,9 +151,9 @@ sap.ui.define([
         },
 
         _resetCredentialsModel() {
-            this.byId("loginFirstNameId").setValue("");
-            this.byId("loginSecondNameId").setValue("");
-            this.byId("loginThirdNameId").setValue("");
+            this.byId("loginFirstNameFieldId").setValue("");
+            this.byId("loginSecondNameFieldId").setValue("");
+            this.byId("loginThirdNameFieldId").setValue("");
         },
     });
 });

@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        id="createUserDialogId"
+        title="{i18n>createUserDialogTitle}">
+        <f:SimpleForm
+            maxContainerCols="1"
+            layout="ResponsiveGridLayout"
+            labelSpanL="12"
+            labelSpanM="12"
+            emptySpanL="0"
+            emptySpanM="0"
+            columnsL="1"
+            columnsM="1">
+            <f:content>
+                <Label text="{i18n>createSecondNameLabel}" required="true"/>
+                <Input/>
+
+                <Label text="{i18n>createNameLabel}" required="true"/>
+                <Input/>
+
+                <Label text="{i18n>createThirdNameLabel}" required="true"/>
+                <Input/>
+
+                <Label text="{i18n>createMobileLabel}" required="true"/>
+                <Input/>
+
+                <Label text="{i18n>createLastResultLabel}"/>
+                <Input/>
+
+                <Label text="{i18n>createLastDateLabel}"/>
+                <Input/>
+
+                <Label text="{i18n>createRoleLabel}" required="true"/>
+                <Input/>
+            </f:content>
+        </f:SimpleForm>
+        <buttons>
+            <Button text="{i18n>createSubmitButton}" press="onSubmitPress" type="Accept"/>
+            <Button text="{i18n>createCancelButton}" press="onCreateCancelPress" type="Reject"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

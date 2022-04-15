@@ -59,8 +59,18 @@
                 items="{
                     path: '/AvailableUsers'
                 }" 
-                class="sapUiMediumMarginTop"
-                noDataText="{i18n>noUsersText}" >
+                class="sapUiResponsiveMargin"
+                noDataText="{i18n>noUsersText}" 
+                width="auto">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer/>
+                        <Button
+                            text="{i18n>createUserButton}"
+                            visible="{/ActiveUser/isAdmin}"
+                            press=".onCreateUserPress"/>
+                    </OverflowToolbar>
+                </headerToolbar>
                 <columns>
                     <Column minScreenWidth="Phone" demandPopin="true">
                         <Text text="{i18n>nameColumn}"/>

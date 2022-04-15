@@ -15,19 +15,19 @@
             columnsL="1"
             columnsM="1">
             <f:content>
-                <Label text="{i18n>loginSecondField}" required="true"/>
-                <Input id="loginSecondNameId"/>
+                <Label text="{i18n>loginSecondNameLabel}" required="true"/>
+                <Input id="loginSecondNameFieldId"/>
 
-                <Label text="{i18n>loginNameField}" required="true"/>
-                <Input id="loginFirstNameId"/>
+                <Label text="{i18n>loginNameLabel}" required="true"/>
+                <Input id="loginFirstNameFieldId"/>
 
-                <Label text="{i18n>loginThirdField}" required="true"/>
-                <Input id="loginThirdNameId"/>
+                <Label text="{i18n>loginThirdNameLabel}" required="true"/>
+                <Input id="loginThirdNameFieldId"/>
             </f:content>
         </f:SimpleForm>
         <buttons>
             <Button text="{i18n>loginSingInButton}" press="onSignInPress"/>
-            <Button text="{i18n>loginCancelButton}" press="onCancelPress" type="Reject"/>
+            <Button text="{i18n>loginCancelButton}" press="onLoginCancelPress" type="Reject"/>
         </buttons>
     </Dialog>
 </core:FragmentDefinition>
