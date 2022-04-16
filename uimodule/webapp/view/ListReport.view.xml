@@ -87,7 +87,7 @@
                 </columns>
 
                 <items>
-                    <ColumnListItem type="Navigation" vAlign="Middle">
+                    <ColumnListItem type="Navigation" vAlign="Middle" press="onLineItemPress" >
                         <cells>
                             <Text text="{name}"/>
                             <Text text="{secondName}"/>

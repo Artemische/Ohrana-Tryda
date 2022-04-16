@@ -76,6 +76,10 @@
           "name": "RouteMainView",
           "pattern": "",
           "target": ["TargetMainView"]
+        }, {
+          "name": "RouteOP",
+          "pattern": "employe/{epmployeId}",
+          "target": ["TargetOP"]
         }
       ],
       "targets": {
@@ -84,6 +88,12 @@
           "viewLevel": 1,
           "viewId": "dynamicPageId",
           "viewName": "ListReport"
+        },
+        "TargetOP": {
+          "viewType": "XML",
+          "viewLevel": 2,
+          "viewId": "pageOP",
+          "viewName": "ObjectPage"
         }
       }
     }

@@ -119,6 +119,15 @@ sap.ui.define([
             this.byId("usersTableId").getBinding("items").filter(aFilters);
         },
 
+        onLineItemPress(oEvent) {
+            const oData = oEvent.getSource().getBindingContext().getObject();
+            const sId = oData.mobilePhone;
+
+            this.getRouter().navTo("RouteOP", {
+                epmployeId: sId
+            })
+        },
+
         _authenticateUser(oLoginCredentials) {
             const oModel = this.getModel();
             const oExistingUser = this._verifyLoginUserExist(oLoginCredentials);
