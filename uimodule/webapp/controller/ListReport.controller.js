@@ -96,10 +96,7 @@ sap.ui.define([
             const sErrorMessage = this.getResourceBundle().getText("loginErrorText");
 
             MessageBox.error(sErrorMessage, {
-                title: sTitle,
-                onClose: () => {
-                    this._resetCredentialsModel();
-                }
+                title: sTitle
             })
         },
       
@@ -157,12 +154,6 @@ sap.ui.define([
                 oUser.secondName.toLowerCase() === oLoginUser.secondName.toLowerCase() &&
                 oUser.thirdName.toLowerCase() === oLoginUser.thirdName.toLowerCase());
 
-        },
-
-        _resetCredentialsModel() {
-            this.byId("loginFirstNameFieldId").setValue("");
-            this.byId("loginSecondNameFieldId").setValue("");
-            this.byId("loginThirdNameFieldId").setValue("");
         },
     });
 });

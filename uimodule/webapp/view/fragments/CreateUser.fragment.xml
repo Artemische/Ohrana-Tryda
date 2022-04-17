@@ -24,17 +24,21 @@
                 <Label text="{i18n>createThirdNameLabel}" required="true"/>
                 <Input/>
 
+                <Label text="{i18n>createLastDateLabel}"/>
+                <DatePicker/>
+
+                <Label text="{i18n>createLastResultLabel}"/>
+                <ComboBox>
+                </ComboBox>
+
                 <Label text="{i18n>createMobileLabel}" required="true"/>
                 <Input/>
 
-                <Label text="{i18n>createLastResultLabel}"/>
-                <Input/>
-
-                <Label text="{i18n>createLastDateLabel}"/>
-                <Input/>
-
                 <Label text="{i18n>createRoleLabel}" required="true"/>
-                <Input/>
+                <RadioButtonGroup id="rbgRolesId" columns="2">
+                    <RadioButton text="{i18n>rbUserRole}"/>
+			        <RadioButton text="{i18n>rbAdminRole}"/>
+                </RadioButtonGroup>
             </f:content>
         </f:SimpleForm>
         <buttons>
