@@ -16,7 +16,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                     department: "",
                     isAdmin: false,
                     lastAttestationDate: "",
-                    lastAttestationResult: "",
+                    isAttestationPassed: "",
                     mobilePhone: "",
                     name: "",
                     secondName: "",
