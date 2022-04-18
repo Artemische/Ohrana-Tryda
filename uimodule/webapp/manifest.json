@@ -78,7 +78,7 @@
           "target": ["TargetMainView"]
         }, {
           "name": "RouteOP",
-          "pattern": "employe/{epmployeId}",
+          "pattern": "employee/{employeeId}",
           "target": ["TargetOP"]
         }
       ],

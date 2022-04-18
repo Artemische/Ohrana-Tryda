@@ -57,7 +57,7 @@
             <Table id="usersTableId" 
                 inset="false" 
                 items="{
-                    path: '/AvailableUsers'
+                    path: '/Users'
                 }" 
                 class="sapUiResponsiveMargin"
                 noDataText="{i18n>noUsersText}" 
@@ -92,8 +92,9 @@
                             <Text text="{name}"/>
                             <Text text="{secondName}"/>
                             <Text text="{department}"/>
-                            <ObjectStatus text="{lastAttestationResult}" 
-                                state="{= ${lastAttestationResult} === 'Сдано' ? 'Success' : 'Error'}" />
+                            <ObjectStatus 
+                                text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" 
+                                state="{= ${isAttestationPassed} ? 'Success': 'Error'}" />
                         </cells>
                     </ColumnListItem>
                 </items>

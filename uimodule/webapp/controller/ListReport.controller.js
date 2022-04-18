@@ -10,7 +10,7 @@ sap.ui.define([
     return Controller.extend("bntu.ohranaTryda.controller.ListReport", {
         
         onInit() {
-            this.openLoginDialog();
+            // this.openLoginDialog();
         },
 
         openLoginDialog() {
@@ -120,8 +120,8 @@ sap.ui.define([
             const oData = oEvent.getSource().getBindingContext().getObject();
             const sId = oData.mobilePhone;
 
-            this.getRouter().navTo("RouteOP", {
-                epmployeId: sId
+            this.getOwnerComponent().getRouter().navTo("RouteOP", {
+                employeeId: sId
             })
         },
 

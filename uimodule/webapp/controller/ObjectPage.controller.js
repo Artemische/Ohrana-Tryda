@@ -15,13 +15,22 @@ sap.ui.define([
 
         _onRouteMatched(oEvent) {
             const oArguments = oEvent.getParameter("arguments");
-            const aItems = this.getModel().getProperty("/AvailableUsers");
-            const sId = oArguments.epmployeId;
+            const aItems = this.getModel().getProperty("/Users");
+            const sId = oArguments.employeeId;
             const sIndex = aItems.findIndex( el => el.mobilePhone === +sId );
 
             this.getView().bindElement({
-                path: `/AvailableUsers/${sIndex}`,
+                path: `/Users/${sIndex}`,
             });
         },
+
+        /**
+		 * Handle the click event for the breadcrumb and routes to the employees listing page.
+		 * 
+		 * @public
+		 */
+		onListEmployeesBreadcrumbsPress: function() {
+			this.getRouter().navTo("RouteMainView");
+		},
     });
 });
