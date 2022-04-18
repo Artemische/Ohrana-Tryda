@@ -20,7 +20,7 @@ sap.ui.define([
             const sIndex = aItems.findIndex( el => el.mobilePhone === +sId );
 
             this.getView().bindElement({
-                path: `/Users/${sIndex}`,
+                path: `/AvailableUsers/${sIndex}`,
             });
         },
 
