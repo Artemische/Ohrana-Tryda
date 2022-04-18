@@ -16,7 +16,14 @@ sap.ui.define([
         measurementId: "G-FRN9R46BM5"
     };
 
+    let fbLoadPromise = new Promise((res, rej) => {});
+
 	return {
+
+
+        getLoadPromise() {
+            return fbLoadPromise;
+        },
 
 		initializeFirebase() {
 			firebase.initializeApp(firebaseConfig);
@@ -26,13 +33,18 @@ sap.ui.define([
             usersRef.on("value", snapshot => {
                 this.handleOnMethodSuccess(snapshot.val());
             }, error => {
-                console.log("Error: " + error.code);
+                fbLoadPromise = Promise.resolve(error);
             });
 		},
 
         handleOnMethodSuccess(snapshotData) {
             const fbModel = sap.ui.getCore().byId("container-ohranaTryda---idAppControl").getModel();
+            const activeUserMobile = sessionStorage.getItem("ActiveUserMobile");
+            const activeUser = snapshotData.find(user => user.mobilePhone == activeUserMobile);
+
             fbModel.setProperty("/Users", snapshotData);
+            activeUser ? fbModel.setProperty("/ActiveUser", activeUser) : null;
+            fbLoadPromise = Promise.resolve();
         },
 
         async handleOnceMethod(path) {
