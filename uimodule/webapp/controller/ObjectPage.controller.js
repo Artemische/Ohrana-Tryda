@@ -17,7 +17,7 @@ sap.ui.define([
             const oArguments = oEvent.getParameter("arguments");
             const aItems = this.getModel().getProperty("/AvailableUsers");
             const sId = oArguments.employeeId;
-            const sIndex = aItems.findIndex( el => el.mobilePhone === +sId );
+            const sIndex = aItems.findIndex(el => el.mobilePhone === +sId );
 
             this.getView().bindElement({
                 path: `/AvailableUsers/${sIndex}`,
