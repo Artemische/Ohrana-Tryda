@@ -10,7 +10,18 @@ sap.ui.define([
     return Controller.extend("bntu.ohranaTryda.controller.ListReport", {
         
         onInit() {
-            this.openLoginDialog();
+            
+        },
+
+        onAfterRendering() {
+            this.getFbLoadPromise().then(() => {
+                const sActiveUserMobile = this.getModel().getProperty("/ActiveUser").mobilePhone;
+
+                sActiveUserMobile ? this._setAvailableUsers() : this.openLoginDialog();
+            }, (oError) => {
+                console.log(oError);
+                // handle data load fail 
+            });
         },
 
         openLoginDialog() {
@@ -130,6 +141,7 @@ sap.ui.define([
             const oExistingUser = this._verifyLoginUserExist(oLoginCredentials);
 
             if (oExistingUser) {
+                sessionStorage.setItem("ActiveUserMobile", oExistingUser.mobilePhone);
                 oModel.setProperty("/ActiveUser", oExistingUser);
                 this._setAvailableUsers();
                 this.closeLoginDialog();
