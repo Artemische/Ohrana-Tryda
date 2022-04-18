@@ -16,23 +16,24 @@
             columnsM="1">
             <f:content>
                 <Label text="{i18n>createSecondNameLabel}" required="true"/>
-                <Input/>
+                <Input value="{configModel>/newUserData/secondName}"/>
 
                 <Label text="{i18n>createNameLabel}" required="true"/>
-                <Input/>
+                <Input value="{configModel>/newUserData/name}"/>
 
                 <Label text="{i18n>createThirdNameLabel}" required="true"/>
-                <Input/>
+                <Input value="{configModel>/newUserData/thirdName}"/>
 
                 <Label text="{i18n>createLastDateLabel}"/>
-                <DatePicker/>
+                <DatePicker value="{configModel>/newUserData/lastAttestationDate}"/>
 
                 <Label text="{i18n>createLastResultLabel}"/>
-                <ComboBox>
+                <ComboBox items="{configModel>/newUserData/isAttestationPassedValues}">
+                    <core:Item key="{configModel>id}" text="{= ${configModel>value} ? 'Сдано' : 'Не сдано'}" />
                 </ComboBox>
 
                 <Label text="{i18n>createMobileLabel}" required="true"/>
-                <Input/>
+                <Input value="{configModel>/newUserData/mobilePhone}"/>
 
                 <Label text="{i18n>createRoleLabel}" required="true"/>
                 <RadioButtonGroup id="rbgRolesId" columns="2">

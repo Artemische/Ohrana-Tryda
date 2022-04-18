@@ -87,19 +87,21 @@ sap.ui.define([
         closeLoginDialog() {
             if (this.oLoginDialog) {
                 this.oLoginDialog.then(oLoginDialog => {
-                    oLoginDialog.close().destroy();
-                    this.oLoginDialog = null;
+                    oLoginDialog.close();
                 });
             }
+
+            this._clearAuthData();
         },
 
         closeCreateUserDialog() {
             if (this.oCreateUserDialog) {
                 this.oCreateUserDialog.then(oCreateUserDialog => {
-                    oCreateUserDialog.close().destroy();
-                    this.oCreateUserDialog = null;
+                    oCreateUserDialog.close();
                 });
             }
+
+            this._clearNewUserData();
         },
 
         handleLoginException() {
@@ -162,10 +164,32 @@ sap.ui.define([
             const oModel = this.getModel();
             const oUsers = oModel.getData().Users;
 
-            return oUsers.find(oUser => oUser.name.toLowerCase() === oLoginUser.name.toLowerCase() && 
-                oUser.secondName.toLowerCase() === oLoginUser.secondName.toLowerCase() &&
-                oUser.thirdName.toLowerCase() === oLoginUser.thirdName.toLowerCase());
+            return oUsers.find(oUser => oUser.name.toLowerCase().trim() === oLoginUser.name.toLowerCase().trim() && 
+                oUser.secondName.toLowerCase().trim() === oLoginUser.secondName.toLowerCase().trim() &&
+                oUser.thirdName.toLowerCase().trim() === oLoginUser.thirdName.toLowerCase().trim());
 
+        },
+
+        _clearAuthData() {
+            const oConfigModel = this.getModel("configModel");
+            const oAuthData = oConfigModel.getData().authData;
+
+            for (let  key in oAuthData) {
+                oAuthData[key] = "";
+            }
+            
+            oConfigModel.setProperty("/authData", oAuthData);
+        },
+
+        _clearNewUserData() {
+            const oConfigModel = this.getModel("configModel");
+            const oNewUserData = oConfigModel.getData().newUserData;
+
+            for (let  key in oNewUserData) {
+                oNewUserData[key] = "";
+            }
+
+            oConfigModel.setProperty("/newUserData", oNewUserData);
         },
     });
 });

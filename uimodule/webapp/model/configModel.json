@@ -1,0 +1,27 @@
+{
+    "authData": {
+        "name": "",
+        "secondName": "",
+        "thirdName": ""
+    },
+
+    "newUserData": {
+        "department": "",
+        "isAdmin": false,
+        "lastAttestationDate": "",
+        "mobilePhone": "",
+        "name": "",
+        "secondName": "",
+        "thirdName": "",
+        "isAttestationPassedValues": [
+            {
+                "id": 1,
+                "value": true 
+            },
+            {
+                "id": 2,
+                "value": false 
+            }
+        ]
+    }
+}
