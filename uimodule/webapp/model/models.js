@@ -14,7 +14,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                 AvailableUsers: [],
                 ActiveUser: {
                     department: "",
-                    isAdmin: true,
+                    isAdmin: false,
                     isAttestationPassed: false,
                     lastAttestationDate: "",
                     mobilePhone: "",

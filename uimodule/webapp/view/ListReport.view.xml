@@ -57,7 +57,7 @@
             <Table id="usersTableId" 
                 inset="false" 
                 items="{
-                    path: '/Users'
+                    path: '/AvailableUsers'
                 }" 
                 class="sapUiResponsiveMargin"
                 noDataText="{i18n>noUsersText}" 

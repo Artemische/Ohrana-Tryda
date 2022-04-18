@@ -10,7 +10,7 @@ sap.ui.define([
     return Controller.extend("bntu.ohranaTryda.controller.ListReport", {
         
         onInit() {
-            // this.openLoginDialog();
+            this.openLoginDialog();
         },
 
         openLoginDialog() {

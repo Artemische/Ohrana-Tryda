@@ -15,7 +15,7 @@ sap.ui.define([
 
         _onRouteMatched(oEvent) {
             const oArguments = oEvent.getParameter("arguments");
-            const aItems = this.getModel().getProperty("/Users");
+            const aItems = this.getModel().getProperty("/AvailableUsers");
             const sId = oArguments.employeeId;
             const sIndex = aItems.findIndex( el => el.mobilePhone === +sId );
 
