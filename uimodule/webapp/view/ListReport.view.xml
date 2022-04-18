@@ -12,8 +12,7 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <vm:VariantManagement standardItemText="{i18n>variantDefaultTxt}">
-                    </vm:VariantManagement>
+                    <Title text="{i18n>listReportTitle}"/>
                 </f:heading>
                 <f:actions>
                     <ToolbarSpacer/>
@@ -25,7 +24,7 @@
         <f:header>
             <f:DynamicPageHeader pinnable="true">
                 <f:content>
-                    <fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="true">
+                    <fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
                         <fb:filterItems>
                             <fb:FilterItem name="A" label="{i18n>nameFltrLbl}">
                                 <fb:control>
@@ -64,6 +63,7 @@
                 width="auto">
                 <headerToolbar>
                     <OverflowToolbar>
+                        <Title text="{i18n>usersTableTitle}"/>
                         <ToolbarSpacer/>
                         <Button
                             text="{i18n>createUserButton}"
