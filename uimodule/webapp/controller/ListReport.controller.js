@@ -10,7 +10,6 @@ sap.ui.define([
     return Controller.extend("bntu.ohranaTryda.controller.ListReport", {
         
         onInit() {
-            
         },
 
         async onAfterRendering() {
@@ -22,11 +21,12 @@ sap.ui.define([
 
             if (oActiveUser) {
                 oModel.setProperty("/ActiveUser", oActiveUser);
-                this._setAvailableUsers();
-                this._setDepartmentFilterValues(aUsers);
+                this._setAvailableUsers();  
             } else {
                 this.openLoginDialog()
-            }                   
+            }
+
+            this._setDepartmentFilterValues(aUsers);
         },
 
 
@@ -44,6 +44,7 @@ sap.ui.define([
                 });
             }
             this.oLoginDialog.then(oLoginDialog => {
+                oLoginDialog.addEventDelegate({onsapenter: this.onSignInPress}, this);
                 oLoginDialog.open();
             });
         },
@@ -70,6 +71,7 @@ sap.ui.define([
                 });
             }
             this.oCreateUserDialog.then(oCreateUserDialog => {
+                oCreateUserDialog.addEventDelegate({onsapenter: this.onSubmitPress}, this);
                 oCreateUserDialog.open();
             });
         },
@@ -97,7 +99,8 @@ sap.ui.define([
         closeLoginDialog() {
             if (this.oLoginDialog) {
                 this.oLoginDialog.then(oLoginDialog => {
-                    oLoginDialog.close();
+                    oLoginDialog.close().destroy();
+                    this.oLoginDialog = null;
                 });
             }
 
@@ -107,7 +110,8 @@ sap.ui.define([
         closeCreateUserDialog() {
             if (this.oCreateUserDialog) {
                 this.oCreateUserDialog.then(oCreateUserDialog => {
-                    oCreateUserDialog.close();
+                    oCreateUserDialog.close().destroy();
+                    this.oCreateUserDialog = null;
                 });
             }
 
@@ -117,8 +121,10 @@ sap.ui.define([
         handleLoginException() {
             const sTitle = this.getResourceBundle().getText("loginErrorTitle");
             const sErrorMessage = this.getResourceBundle().getText("loginErrorText");
+            const sCloseButtonText = this.getResourceBundle().getText("closeButton");
 
             MessageBox.error(sErrorMessage, {
+                actions: [sCloseButtonText],
                 title: sTitle
             })
         },
