@@ -80,8 +80,19 @@ sap.ui.define([
             this._authenticateUser(oLoginCredentials);
         },
 
-        onSubmitPress() {
+        async onSubmitPress() {
+            const oNewUser = this.getModel("configModel").getProperty("/newUserData");
+            const sSuccessUserCreationMessage = this.getResourceBundle().getText("successUserCreationMsg");
+            const sSuccessUserCreationTitle = this.getResourceBundle().getText("successUserCreationTitle");
+            debugger
+            await this.createBaseRequest("Users/", oNewUser);
 
+            MessageBox.success(sSuccessUserCreationMessage, {
+                title: sSuccessUserCreationTitle,
+                onClose: () => {
+                    this.closeCreateUserDialog();
+                }
+            });            
         },
 
         closeLoginDialog() {

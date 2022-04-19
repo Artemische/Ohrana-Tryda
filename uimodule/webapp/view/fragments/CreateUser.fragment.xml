@@ -24,21 +24,25 @@
                 <Label text="{i18n>createThirdNameLabel}" required="true"/>
                 <Input value="{configModel>/newUserData/thirdName}"/>
 
-                <Label text="{i18n>createLastDateLabel}"/>
-                <DatePicker value="{configModel>/newUserData/lastAttestationDate}"/>
-
-                <Label text="{i18n>createLastResultLabel}"/>
-                <ComboBox items="{configModel>/newUserData/isAttestationPassedValues}">
-                    <core:Item key="{configModel>id}" text="{= ${configModel>value} ? 'Сдано' : 'Не сдано'}" />
-                </ComboBox>
+                <Label text="{i18n>createDepartmentLabel}" required="true"/>
+                <Input value="{configModel>/newUserData/department}"/>
 
                 <Label text="{i18n>createMobileLabel}" required="true"/>
                 <Input value="{configModel>/newUserData/mobilePhone}"/>
 
+                <Label text="{i18n>createLastDateLabel}"/>
+                <DatePicker value="{configModel>/newUserData/lastAttestationDate}"/>
+
+                <Label text="{i18n>createLastResultLabel}"/>
+                <RadioButtonGroup id="rbgResultId" columns="2">
+			        <RadioButton text="{i18n>rbFailResult}"/>
+                    <RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+                </RadioButtonGroup>
+
                 <Label text="{i18n>createRoleLabel}" required="true"/>
                 <RadioButtonGroup id="rbgRolesId" columns="2">
                     <RadioButton text="{i18n>rbUserRole}"/>
-			        <RadioButton text="{i18n>rbAdminRole}"/>
+			        <RadioButton text="{i18n>rbAdminRole}" selected="{configModel>/newUserData/isAdmin}"/>
                 </RadioButtonGroup>
             </f:content>
         </f:SimpleForm>

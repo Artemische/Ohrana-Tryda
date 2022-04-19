@@ -9,19 +9,10 @@
         "department": "",
         "isAdmin": false,
         "lastAttestationDate": "",
+        "isAttestationPassed": false,
         "mobilePhone": "",
         "name": "",
         "secondName": "",
-        "thirdName": "",
-        "isAttestationPassedValues": [
-            {
-                "id": 1,
-                "value": true 
-            },
-            {
-                "id": 2,
-                "value": false 
-            }
-        ]
+        "thirdName": ""
     }
 }

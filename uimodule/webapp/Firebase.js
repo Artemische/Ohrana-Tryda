@@ -38,11 +38,12 @@ sap.ui.define([
 		},
 
         handleOnMethodSuccess(snapshotData) {
+            const users = Object.values(snapshotData);
             const fbModel = sap.ui.getCore().byId("container-ohranaTryda---idAppControl").getModel();
             const activeUserMobile = sessionStorage.getItem("ActiveUserMobile");
-            const activeUser = snapshotData.find(user => user.mobilePhone == activeUserMobile);
+            const activeUser = users.find(user => user.mobilePhone == activeUserMobile);
 
-            fbModel.setProperty("/Users", snapshotData);
+            fbModel.setProperty("/Users", users);
             activeUser ? fbModel.setProperty("/ActiveUser", activeUser) : null;
             fbLoadPromise = Promise.resolve();
         },
@@ -58,8 +59,7 @@ sap.ui.define([
         },
 
         handleSetMethod(path, doc) {
-            const ref = firebase.database().ref(path);
-            ref.set(doc);
+            return firebase.database().ref(path).push().set(doc);
         },
 
         handleRemoveMethod(path) {
