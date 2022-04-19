@@ -4,18 +4,12 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
 	xmlns:blockcolor="sap.uxap.sample.ObjectPageFormLayout.controller.blocks"
-	xmlns:m="sap.m"
-	controllerName="bntu.ohranaTryda.controller.ObjectPage"
-	height="100%">
-	<ObjectPageLayout id="pageOP"
-		showTitleInHeaderContent="true"
-		showEditHeaderButton="true"
-		editHeaderButtonPress="handleEditBtnPress"
-		upperCaseAnchorBar="false">
+	xmlns:m="sap.m" controllerName="bntu.ohranaTryda.controller.ObjectPage" height="100%">
+	<ObjectPageLayout id="pageOP" showTitleInHeaderContent="true" showEditHeaderButton="true" editHeaderButtonPress="handleEditBtnPress" upperCaseAnchorBar="false">
 		<headerTitle>
 			<ObjectPageDynamicHeaderTitle>
 				<breadcrumbs>
-					<m:Breadcrumbs id="breadcrumbsId" currentLocationText="Аттестация" >
+					<m:Breadcrumbs id="breadcrumbsId" currentLocationText="Аттестация">
 						<m:Link text="Главная" press=".onListEmployeesBreadcrumbsPress"/>
 					</m:Breadcrumbs>
 				</breadcrumbs>
@@ -54,31 +48,100 @@
 				<m:Avatar class="sapUiSmallMarginEnd" displaySize="L" />
 
 				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
-					<m:Label text="Кафедра:" design="Bold"/>
-					<m:Label text="{department}"/>
+					<m:HBox alignItems="Center">
+						<m:Label text="Кафедра:" design="Bold"/>
+						<m:Label class="sapUiTinyMarginBegin" text="{department}"/>
+					</m:HBox>
+					<m:HBox alignItems="Center" class="sapUiSmallMarginTop">
+						<m:Label text="Телефон:" design="Bold"/>
+						<m:Link class="sapUiTinyMarginBegin" text="{mobilePhone}" href="tel:{mobilePhone}" />
+					</m:HBox>
 				</layout:VerticalLayout>
 
 				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
-					<m:Label text="Телефон:" design="Bold"/>
-					<m:Label text="{mobilePhone}"/>
+					<m:HBox alignItems="Center">
+						<m:Label text="Результат аттестации:" design="Bold"/>
+						<m:ObjectStatus class="sapUiTinyMarginBegin" text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" state="{= ${isAttestationPassed} ? 'Success': 'Error'}"/>
+					</m:HBox>
+					<m:HBox alignItems="Center" class="sapUiSmallMarginTop">
+						<m:Label text="Дата сдачи:" design="Bold"/>
+						<m:Label text="{lastAttestationDate}" class="sapUiTinyMarginBegin"/>
+					</m:HBox>
 				</layout:VerticalLayout>
 
-				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
-					<m:Label text="Результат аттестации:" design="Bold"/>
-					<m:ObjectStatus 
-						text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" 
-						state="{= ${isAttestationPassed} ? 'Success': 'Error'}"/>
-				</layout:VerticalLayout>
-
-				<layout:VerticalLayout class="sapUiSmallMarginBeginEnd" visible="{isAttestationPassed}">
-					<m:Label text="Дата сдачи:" design="Bold"/>
-					<m:Label text="{lastAttestationDate}"/>
-				</layout:VerticalLayout>
 			</m:FlexBox>
 		</headerContent>
 
 		<sections>
-				<ObjectPageSection titleUppercase="false" id="Employment" title="Вопросы">
+			<ObjectPageSection titleUppercase="false" id="generalInfoSection" title="Главная информация">
+				<subSections>
+					<ObjectPageSubSection titleUppercase="false">
+						<f:Form width="100%">
+							<f:layout>
+								<f:ColumnLayout columnsXL="3" columnsM="2" columnsL="3"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer id="commonInfo" title="{i18n>commonInfoTtl}">
+									<f:formElements>
+										<f:FormElement label="{i18n>nameLbl}">
+											<f:fields>
+												<m:Text text="{name}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>snameLbl}">
+											<f:fields>
+												<m:Text text="{secondName}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>tnameLbl}">
+											<f:fields>
+												<m:Text text="{thirdName}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>departmentLbl}">
+											<f:fields>
+												<m:Text text="{department}"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+
+								<f:FormContainer id="testInfo" title="{i18n>testTtl}">
+									<f:formElements>
+										<f:FormElement label="{i18n>testResultLbl}">
+											<f:fields>
+												<m:ObjectStatus text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" state="{= ${isAttestationPassed} ? 'Success': 'Error'}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>testDateLbl}">
+											<f:fields>
+												<m:Text text="{lastAttestationDate}"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+
+								<f:FormContainer id="contactInfo" title="{i18n>constactInfoTtl}">
+									<f:formElements>
+										<f:FormElement label="{i18n>mobileLbl}">
+											<f:fields>
+												<m:Link text="{mobilePhone}" href="tel:{mobilePhone}" />
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>emailLbl}">
+											<f:fields>
+												<m:Text text="{mail}"/>
+											</f:fields>
+										</f:FormElement>
+
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+			<ObjectPageSection titleUppercase="false" id="Employment" title="Вопросы">
 				<subSections>
 					<ObjectPageSubSection titleUppercase="false">
 						<f:SimpleForm editable="true" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
@@ -90,7 +153,7 @@
 									<m:RadioButton id="RB2-3" text="Option 3" />
 									<m:RadioButton id="RB2-31" text="Option 4" />
 								</m:RadioButtonGroup>
-								
+
 								<m:Label text="как назваеься поошрама серьезность если она будешь?"/>
 								<m:RadioButtonGroup id="rbg27" columns="1" class="sapUiMediumMarginBottom">
 									<m:RadioButton id="R5345B2-1" text="Option 1" />
