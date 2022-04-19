@@ -43,8 +43,8 @@
 				</snappedContent>
 
 				<actions>
-					<m:Button text="Редактировать" type="Emphasized" visible="{ActiveUser>/isAdmin}" press="toggleFooter"/>
-					<m:Button text="Удалить" type="Emphasized" visible="{ActiveUser>/isAdmin}" press="toggleFooter"/>
+					<m:Button id="editButtonId" text="{i18n>editOPbutton}" type="Emphasized" visible="{/ActiveUser/isAdmin}" press="toggleFooter"/>
+					<m:Button id="deleteButtonId" text="{i18n>deleteOPbutton}" type="Emphasized" visible="{/ActiveUser/isAdmin}" press="toggleFooter"/>
 				</actions>
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>
