@@ -82,10 +82,7 @@ sap.ui.define(
             updateBaseRequest(sPath, oDoc) {
                 return Firebase.handleUpdateMethod(sPath, oDoc);
             },
-
-            getFbLoadPromise() {
-                return Firebase.getLoadPromise();
-            }
+            
         });
     }
 );

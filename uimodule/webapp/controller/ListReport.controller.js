@@ -13,16 +13,22 @@ sap.ui.define([
             
         },
 
-        onAfterRendering() {
-            this.getFbLoadPromise().then(() => {
-                const sActiveUserMobile = this.getModel().getProperty("/ActiveUser").mobilePhone;
+        async onAfterRendering() {
+            const oModel = this.getModel();
+            const oResponce = await this.readBaseRequest("Users/");
+            const aUsers = Object.values(oResponce);
+            const sActiveUserMobile = sessionStorage.getItem("ActiveUserMobile");
+            debugger
+            const oActiveUser = aUsers.find(user => user.mobilePhone == sActiveUserMobile);
 
-                sActiveUserMobile ? this._setAvailableUsers() : this.openLoginDialog();
-            }, (oError) => {
-                console.log(oError);
-                // handle data load fail 
-            });
+            if (oActiveUser) {
+                oModel.setProperty("/ActiveUser", oActiveUser);
+                this._setAvailableUsers();
+            } else {
+                this.openLoginDialog()
+            }                   
         },
+
 
         openLoginDialog() {
             const oView = this.getView();
@@ -69,22 +75,15 @@ sap.ui.define([
         },
 
         onSignInPress() {
-            var sName = this.byId("loginFirstNameFieldId").getValue();
-            var sSecondName = this.byId("loginSecondNameFieldId").getValue();
-            var sThirdName = this.byId("loginThirdNameFieldId").getValue();
-            const oLoginCredentials = {
-                name: sName,
-                secondName: sSecondName,
-                thirdName: sThirdName
-            };
-            this._authenticateUser(oLoginCredentials);
+            const oAuthData = this.getModel("configModel").getProperty("/authData");
+            this._authenticateUser(oAuthData);
         },
 
         async onSubmitPress() {
             const oNewUser = this.getModel("configModel").getProperty("/newUserData");
             const sSuccessUserCreationMessage = this.getResourceBundle().getText("successUserCreationMsg");
             const sSuccessUserCreationTitle = this.getResourceBundle().getText("successUserCreationTitle");
-            debugger
+
             await this.createBaseRequest("Users/", oNewUser);
 
             MessageBox.success(sSuccessUserCreationMessage, {

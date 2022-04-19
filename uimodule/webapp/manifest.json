@@ -8,13 +8,7 @@
       "version": "1.0.0"
     },
     "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "dataSources": {
-      "ConfigModelFile": {
-        "uri": "model/configModel.json",
-        "type": "JSON"
-      }
-    }
+    "description": "{{appDescription}}"
   },
   "sap.ui": {
     "technology": "UI5",
@@ -59,10 +53,6 @@
         "settings": {
           "bundleName": "bntu.ohranaTryda.i18n.i18n"
         }
-      },
-      "configModel": {
-        "type": "sap.ui.model.json.JSONModel",
-        "dataSource": "ConfigModelFile"
       }
     },
     "resources": {

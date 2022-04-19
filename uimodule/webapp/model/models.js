@@ -24,6 +24,27 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                 },
                 Questions: []
             });
-        }
+        },
+
+        createConfigModel () {
+            return new JSONModel({
+                authData: {
+                    name: "",
+                    secondName: "",
+                    thirdName: ""
+                },
+            
+                newUserData: {
+                    department: "",
+                    isAdmin: false,
+                    lastAttestationDate: "",
+                    isAttestationPassed: false,
+                    mobilePhone: "",
+                    name: "",
+                    secondName: "",
+                    thirdName: ""
+                }
+            });
+        },
     };
 });

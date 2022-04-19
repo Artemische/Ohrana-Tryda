@@ -29,6 +29,9 @@ sap.ui.define([
                 // set the firebase model
                 this.setModel(models.createFbModel());
 
+                // set config model
+                this.setModel(models.createConfigModel(), "configModel");
+
                 // initialize firebase
                 Firebase.initializeFirebase();
             }
