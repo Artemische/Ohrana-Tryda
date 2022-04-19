@@ -197,7 +197,7 @@ sap.ui.define([
             const oNewUserData = oConfigModel.getData().newUserData;
 
             for (let  key in oNewUserData) {
-                oNewUserData[key] = "";
+                typeof(oNewUserData[key]) === "string" ? oNewUserData[key] = "" : oNewUserData[key] = false;
             }
 
             oConfigModel.setProperty("/newUserData", oNewUserData);

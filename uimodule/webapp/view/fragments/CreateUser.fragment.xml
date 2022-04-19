@@ -35,13 +35,13 @@
 
                 <Label text="{i18n>createLastResultLabel}"/>
                 <RadioButtonGroup id="rbgResultId" columns="2">
-			        <RadioButton text="{i18n>rbFailResult}"/>
+			        <RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
                     <RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
                 </RadioButtonGroup>
 
                 <Label text="{i18n>createRoleLabel}" required="true"/>
                 <RadioButtonGroup id="rbgRolesId" columns="2">
-                    <RadioButton text="{i18n>rbUserRole}"/>
+                    <RadioButton text="{i18n>rbUserRole}" selected="{= !${configModel>/newUserData/isAdmin}}"/>
 			        <RadioButton text="{i18n>rbAdminRole}" selected="{configModel>/newUserData/isAdmin}"/>
                 </RadioButtonGroup>
             </f:content>
