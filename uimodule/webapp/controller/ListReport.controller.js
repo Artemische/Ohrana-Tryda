@@ -18,12 +18,12 @@ sap.ui.define([
             const oResponce = await this.readBaseRequest("Users/");
             const aUsers = Object.values(oResponce);
             const sActiveUserMobile = sessionStorage.getItem("ActiveUserMobile");
-            debugger
             const oActiveUser = aUsers.find(user => user.mobilePhone == sActiveUserMobile);
 
             if (oActiveUser) {
                 oModel.setProperty("/ActiveUser", oActiveUser);
                 this._setAvailableUsers();
+                this._setDepartmentFilterValues(aUsers);
             } else {
                 this.openLoginDialog()
             }                   
@@ -201,5 +201,18 @@ sap.ui.define([
 
             oConfigModel.setProperty("/newUserData", oNewUserData);
         },
+
+        _setDepartmentFilterValues(aUsers) {
+            const aDepartments = Array.from(new Set(aUsers.map(user => user.department)));
+            const oConfigModel = this.getModel("configModel");
+            const aFilterStructure = aDepartments.map((elem, index) => {
+                return {
+                    key: index,
+                    value: elem
+                }
+            });
+
+            oConfigModel.setProperty("/Departments", aFilterStructure);
+        }
     });
 });

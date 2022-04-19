@@ -11,6 +11,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
         createFbModel() {
             return new JSONModel({
                 Users: [],
+                Questions: [],
                 AvailableUsers: [],
                 ActiveUser: {
                     department: "",
@@ -21,8 +22,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                     name: "",
                     secondName: "",
                     thirdName: "",
-                },
-                Questions: []
+                }
             });
         },
 
@@ -43,7 +43,9 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                     name: "",
                     secondName: "",
                     thirdName: ""
-                }
+                },
+                
+                Departments: []
             });
         },
     };

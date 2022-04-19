@@ -31,8 +31,8 @@ sap.ui.define([
 		},
 
         handleOnMethodSuccess(snapshotData) {
-            const users = Object.values(snapshotData);
             const fbModel = sap.ui.getCore().byId("container-ohranaTryda---idAppControl").getModel();
+            const users = Object.values(snapshotData);
 
             fbModel.setProperty("/Users", users);
         },
@@ -40,6 +40,7 @@ sap.ui.define([
         async handleOnceMethod(path) {
             const ref = firebase.database().ref(path);
             const snapshot = await ref.once("value");
+
             if (snapshot.exists()) {
                 return snapshot.val();
             } else {
@@ -52,13 +53,13 @@ sap.ui.define([
         },
 
         handleRemoveMethod(path) {
-            const ref = firebase.database().ref(path);
-            ref.remove();
+            return firebase.database().ref(path).remove();
         },
 
         handleUpdateMethod(path, doc) {
             const updates = {};
             const ref = firebase.database().ref();
+            
             updates[path] = doc;
             ref.update(updates);
         }

@@ -38,11 +38,11 @@
                             </fb:FilterItem>
                             <fb:FilterItem name="C" label="{i18n>departmentFltrLbl}">
                                 <fb:control>
-                                    <Select id="departmentFltr" app:prop="department" change="onFilterChange" forceSelection="false" items="{
-                                            path: '/departments'
+                                    <ComboBox id="departmentFltr" app:prop="department" change="onFilterChange" items="{
+                                            path: 'configModel>/Departments'
                                         }">
-                                        <core:Item key="{key}" text="{name}"/>
-                                    </Select>
+                                        <core:Item key="{configModel>key}" text="{configModel>value}"/>
+                                    </ComboBox>
                                 </fb:control>
                             </fb:FilterItem>
                         </fb:filterItems>
