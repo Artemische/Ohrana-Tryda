@@ -167,16 +167,6 @@ sap.ui.define([
             }
         },
 
-        _setAvailableUsers() {
-            const oModel = this.getModel();
-            const bActiveUserIsAdmin = oModel.getProperty("/ActiveUser/isAdmin");
-            if (bActiveUserIsAdmin) {
-                oModel.setProperty("/AvailableUsers", Object.values(oModel.getProperty("/Users")));            
-            } else {
-                oModel.setProperty("/AvailableUsers", [oModel.getProperty("/ActiveUser")]);
-            }
-        },
-
         _verifyLoginUserExist(oLoginUser) {
             const oModel = this.getModel();
             const aUsers = Object.values(oModel.getData().Users);

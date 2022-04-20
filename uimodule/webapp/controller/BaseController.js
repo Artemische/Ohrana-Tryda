@@ -82,6 +82,17 @@ sap.ui.define(
             updateBaseRequest(sPath, oDoc) {
                 return Firebase.handleUpdateMethod(sPath, oDoc);
             },
+
+            _setAvailableUsers() {
+                const oModel = this.getModel();
+                debugger
+                const bActiveUserIsAdmin = oModel.getProperty("/ActiveUser/isAdmin");
+                if (bActiveUserIsAdmin) {
+                    oModel.setProperty("/AvailableUsers", Object.values(oModel.getProperty("/Users")));            
+                } else {
+                    oModel.setProperty("/AvailableUsers", [oModel.getProperty("/ActiveUser")]);
+                }
+            },
             
         });
     }

@@ -10,11 +10,16 @@ sap.ui.define([
             this.getRouter().getRoute("RouteOP").attachPatternMatched(this._onRouteMatched, this);
         },
 
-        _onRouteMatched(oEvent) {
+        async _onRouteMatched(oEvent) {
             const oArguments = oEvent.getParameter("arguments");
-            const aItems = this.getModel().getProperty("/AvailableUsers");
             const sId = oArguments.employeeId;
-            const sIndex = aItems.findIndex(el => el.mobilePhone.toString() === sId );
+            let aItems;
+            let sIndex;
+
+            await this._authorizeUser();
+            
+            aItems = this.getModel().getProperty("/AvailableUsers");
+            sIndex = aItems.findIndex(el => el.mobilePhone.toString() === sId );
 
             this.sId= sId;
             this.getView().bindElement({
@@ -67,6 +72,18 @@ sap.ui.define([
         
         _getSelectedUserId(oUsers) {
             return Object.entries(oUsers).find(([key, value]) => value.mobilePhone.toString() === this.sId)[0];
-        }
+        },
+
+        async _authorizeUser() {
+            const oModel = this.getModel();
+            const oUsers = await this.readBaseRequest("Users/");
+            const sActiveUserMobile = sessionStorage.getItem("ActiveUserMobile");
+            const oActiveUser = Object.values(oUsers).find(user => user.mobilePhone == sActiveUserMobile);
+
+            if (oActiveUser) {
+                oModel.setProperty("/ActiveUser", oActiveUser);
+                this._setAvailableUsers();  
+            }
+        },
     });
 });
