@@ -1,10 +1,7 @@
 sap.ui.define([
     "bntu/ohranaTryda/controller/BaseController",
-    "sap/ui/core/Fragment",
     "sap/m/MessageBox",
-    "sap/ui/model/Filter", 
-    "sap/ui/model/FilterOperator",
-], function (Controller, Fragment, MessageBox, Filter, FilterOperator) {
+], function (Controller, MessageBox) {
     "use strict";
 
     return Controller.extend("bntu.ohranaTryda.controller.ObjectPage", {
