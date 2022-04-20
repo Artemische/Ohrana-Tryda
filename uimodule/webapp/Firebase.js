@@ -32,7 +32,7 @@ sap.ui.define([
 
         handleOnMethodSuccess(snapshotData) {
             const fbModel = sap.ui.getCore().byId("container-ohranaTryda---idAppControl").getModel();
-            const users = Object.values(snapshotData);
+            const users = snapshotData;
 
             fbModel.setProperty("/Users", users);
         },

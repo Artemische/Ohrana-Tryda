@@ -14,10 +14,9 @@ sap.ui.define([
 
         async onAfterRendering() {
             const oModel = this.getModel();
-            const oResponce = await this.readBaseRequest("Users/");
-            const aUsers = Object.values(oResponce);
+            const oUsers = await this.readBaseRequest("Users/");
             const sActiveUserMobile = sessionStorage.getItem("ActiveUserMobile");
-            const oActiveUser = aUsers.find(user => user.mobilePhone == sActiveUserMobile);
+            const oActiveUser = Object.values(oUsers).find(user => user.mobilePhone == sActiveUserMobile);
 
             if (oActiveUser) {
                 oModel.setProperty("/ActiveUser", oActiveUser);
@@ -26,7 +25,7 @@ sap.ui.define([
                 this.openLoginDialog()
             }
 
-            this._setDepartmentFilterValues(aUsers);
+            this._setDepartmentFilterValues(Object.values(oUsers));
         },
 
 
@@ -171,16 +170,18 @@ sap.ui.define([
         _setAvailableUsers() {
             const oModel = this.getModel();
             const bActiveUserIsAdmin = oModel.getProperty("/ActiveUser/isAdmin");
-            const sProperty = bActiveUserIsAdmin ? "/Users" : "/ActiveUser";
-
-            oModel.setProperty("/AvailableUsers", [].concat(oModel.getProperty(sProperty)));
+            if (bActiveUserIsAdmin) {
+                oModel.setProperty("/AvailableUsers", Object.values(oModel.getProperty("/Users")));            
+            } else {
+                oModel.setProperty("/AvailableUsers", [oModel.getProperty("/ActiveUser")]);
+            }
         },
 
         _verifyLoginUserExist(oLoginUser) {
             const oModel = this.getModel();
-            const oUsers = oModel.getData().Users;
+            const aUsers = Object.values(oModel.getData().Users);
 
-            return oUsers.find(oUser => oUser.name.toLowerCase().trim() === oLoginUser.name.toLowerCase().trim() && 
+            return aUsers.find(oUser => oUser.name.toLowerCase().trim() === oLoginUser.name.toLowerCase().trim() && 
                 oUser.secondName.toLowerCase().trim() === oLoginUser.secondName.toLowerCase().trim() &&
                 oUser.thirdName.toLowerCase().trim() === oLoginUser.thirdName.toLowerCase().trim());
 
