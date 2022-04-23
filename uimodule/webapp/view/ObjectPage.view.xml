@@ -5,7 +5,11 @@
 	xmlns:core="sap.ui.core"
 	xmlns:blockcolor="sap.uxap.sample.ObjectPageFormLayout.controller.blocks"
 	xmlns:m="sap.m" controllerName="bntu.ohranaTryda.controller.ObjectPage" height="100%">
-	<ObjectPageLayout id="pageOP" showTitleInHeaderContent="true" showEditHeaderButton="true" editHeaderButtonPress="handleEditBtnPress" upperCaseAnchorBar="false">
+	<ObjectPageLayout 
+		id="pageOP" showTitleInHeaderContent="true" showEditHeaderButton="true" 
+		showFooter="{configModel>/editMode}"
+		editHeaderButtonPress="handleEditBtnPress" 
+		upperCaseAnchorBar="false">
 		<headerTitle>
 			<ObjectPageDynamicHeaderTitle>
 				<breadcrumbs>
@@ -37,8 +41,8 @@
 				</snappedContent>
 
 				<actions>
-					<m:Button id="editButtonId" text="{i18n>editOPbutton}" type="Emphasized" visible="{/ActiveUser/isAdmin}" press="toggleFooter"/>
-					<m:Button id="deleteButtonId" text="{i18n>deleteOPbutton}" type="Emphasized" visible="{/ActiveUser/isAdmin}" press="onDeletePress"/>
+					<m:Button id="editButtonId" text="{i18n>editOPbutton}" type="Emphasized" visible="{= ${/ActiveUser/isAdmin} &amp;&amp; !${configModel>/editMode}}" press="onEditPress"/>
+					<m:Button id="deleteButtonId" text="{i18n>deleteOPbutton}" type="Default" visible="{= ${/ActiveUser/isAdmin} &amp;&amp; !${configModel>/editMode}}" press="onDeletePress"/>
 				</actions>
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>
@@ -76,7 +80,7 @@
 			<ObjectPageSection titleUppercase="false" id="generalInfoSection" title="Главная информация">
 				<subSections>
 					<ObjectPageSubSection titleUppercase="false">
-						<f:Form width="100%">
+						<f:Form editable="true" width="100%">
 							<f:layout>
 								<f:ColumnLayout columnsXL="3" columnsM="2" columnsL="3"/>
 							</f:layout>
@@ -85,22 +89,26 @@
 									<f:formElements>
 										<f:FormElement label="{i18n>nameLbl}">
 											<f:fields>
-												<m:Text text="{name}"/>
+												<m:Input value="{name}" visible="{configModel>/editMode}" />
+												<m:Text text="{name}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 										<f:FormElement label="{i18n>snameLbl}">
 											<f:fields>
-												<m:Text text="{secondName}"/>
+												<m:Input value="{secondName}" visible="{configModel>/editMode}" />
+												<m:Text text="{secondName}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 										<f:FormElement label="{i18n>tnameLbl}">
 											<f:fields>
-												<m:Text text="{thirdName}"/>
+												<m:Input value="{thirdName}" visible="{configModel>/editMode}" />
+												<m:Text text="{thirdName}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 										<f:FormElement label="{i18n>departmentLbl}">
 											<f:fields>
-												<m:Text text="{department}"/>
+												<m:Input value="{department}" visible="{configModel>/editMode}" />
+												<m:Text text="{department}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 									</f:formElements>
@@ -110,12 +118,18 @@
 									<f:formElements>
 										<f:FormElement label="{i18n>testResultLbl}">
 											<f:fields>
-												<m:ObjectStatus text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" state="{= ${isAttestationPassed} ? 'Success': 'Error'}"/>
+												<m:Select visible="{configModel>/editMode}" selectedKey="{isAttestationPassed}" items="{configModel>/testResults}" >
+													<m:items>
+														<core:Item text="{configModel>text}" key="{configModel>key}" />
+													</m:items>
+												</m:Select>
+												<m:ObjectStatus text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" state="{= ${isAttestationPassed} ? 'Success': 'Error'}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 										<f:FormElement label="{i18n>testDateLbl}">
 											<f:fields>
-												<m:Text text="{lastAttestationDate}"/>
+												<m:DatePicker value="{lastAttestationDate}" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" visible="{configModel>/editMode}" />
+												<m:Text text="{lastAttestationDate}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 									</f:formElements>
@@ -125,12 +139,14 @@
 									<f:formElements>
 										<f:FormElement label="{i18n>mobileLbl}">
 											<f:fields>
-												<m:Link text="{mobilePhone}" href="tel:{mobilePhone}" />
+												<m:Input value="{mobilePhone}" visible="{configModel>/editMode}" />
+												<m:Link text="{mobilePhone}" href="tel:{mobilePhone}"  visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 										<f:FormElement label="{i18n>emailLbl}">
 											<f:fields>
-												<m:Text text="{mail}"/>
+												<m:Input value="{mail}" visible="{configModel>/editMode}" />
+												<m:Text text="{mail}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 
@@ -203,8 +219,8 @@
 		<footer>
 			<m:OverflowToolbar>
 				<m:ToolbarSpacer />
-				<m:Button type="Accept" text="Accept"/>
-				<m:Button type="Reject" text="Reject"/>
+				<m:Button type="Emphasized" text="{i18n>saveBtn}" press="onFooterActionPress" />
+				<m:Button type="Default" text="{i18n>cancelBtn}" press="onFooterActionPress($event, true)" />
 			</m:OverflowToolbar>
 		</footer>
 	</ObjectPageLayout>

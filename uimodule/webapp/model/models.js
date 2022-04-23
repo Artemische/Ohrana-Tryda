@@ -28,6 +28,8 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
 
         createConfigModel () {
             return new JSONModel({
+                editMode: false,
+
                 authData: {
                     name: "",
                     secondName: "",
@@ -43,6 +45,15 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                     name: "",
                     secondName: "",
                     thirdName: ""
+                },
+
+                testResults: [
+                    {text: 'Cдано', key: true},
+                    {text: 'Не сдано', key: ""}
+                ],
+
+                userCashData: {
+
                 },
                 
                 Departments: []

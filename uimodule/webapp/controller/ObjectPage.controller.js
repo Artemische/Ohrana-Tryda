@@ -36,9 +36,31 @@ sap.ui.define([
 		 * 
 		 * @public
 		 */
-		onListEmployeesBreadcrumbsPress: function() {
+		onListEmployeesBreadcrumbsPress() {
             this.navigateToTheListReport();
 		},
+
+        onEditPress() {
+            const oConfigModel = this.getModel("configModel");
+            const oUserData = {
+                ...this.getView().getBindingContext().getObject()
+            };
+
+            oConfigModel.setProperty("/userCashData", oUserData);
+            oConfigModel.setProperty("/editMode", true);
+        },
+
+        onFooterActionPress(oEvent, bCancel) {
+            const oConfigModel = this.getModel("configModel");
+
+            if (bCancel) {
+                const sPath = this.getView().getBindingContext().getPath();
+                
+                this.getModel().setProperty(sPath, oConfigModel.getProperty("/userCashData"));
+            }
+
+            oConfigModel.setProperty("/editMode", false);
+        },
 
         onDeletePress() {
             const sWarningMessage = this.getResourceBundle().getText("deleteUserText");

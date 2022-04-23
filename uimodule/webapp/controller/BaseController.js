@@ -85,8 +85,8 @@ sap.ui.define(
 
             _setAvailableUsers() {
                 const oModel = this.getModel();
-                debugger
                 const bActiveUserIsAdmin = oModel.getProperty("/ActiveUser/isAdmin");
+                
                 if (bActiveUserIsAdmin) {
                     oModel.setProperty("/AvailableUsers", Object.values(oModel.getProperty("/Users")));            
                 } else {
