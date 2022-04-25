@@ -166,6 +166,14 @@ sap.ui.define([
             oConfigModel.setProperty("/newUserData/lastAttestationDate", "");
         },
 
+        onRgbRoleSelect() {
+            const oConfigModel = this.getModel("configModel");
+
+            oConfigModel.setProperty("/newUserData/lastAttestationDate", "");
+            oConfigModel.setProperty("/newUserData/ticket", "");
+            oConfigModel.setProperty("/newUserData/isAttestationPassed", false);
+        },
+
         _authenticateUser(oLoginCredentials) {
             const oModel = this.getModel();
             const oExistingUser = this._verifyLoginUserExist(oLoginCredentials);

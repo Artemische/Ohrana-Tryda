@@ -45,7 +45,8 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                     mobilePhone: "",
                     name: "",
                     secondName: "",
-                    thirdName: ""
+                    thirdName: "",
+                    ticket: ""
                 },
 
                 testResults: [

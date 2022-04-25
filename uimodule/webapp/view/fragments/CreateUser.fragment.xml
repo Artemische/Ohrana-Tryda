@@ -30,20 +30,48 @@
                 <Label text="{i18n>createMobileLabel}" required="true"/>
                 <Input value="{configModel>/newUserData/mobilePhone}"/>
 
-                <Label text="{i18n>createLastResultLabel}" required="true"/>
-                <RadioButtonGroup id="rbgResultId" columns="2"  select="onRgbResultSelect">
-			        <RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
-                    <RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-                </RadioButtonGroup>
-
-                <Label text="{i18n>createLastDateLabel}" visible="{configModel>/newUserData/isAttestationPassed}"/>
-                <DatePicker value="{configModel>/newUserData/lastAttestationDate}" visible="{configModel>/newUserData/isAttestationPassed}" width="100%"/>
-
                 <Label text="{i18n>createRoleLabel}" required="true"/>
-                <RadioButtonGroup id="rbgRolesId" columns="2">
-                    <RadioButton text="{i18n>rbUserRole}" selected="{= !${configModel>/newUserData/isAdmin}}"/>
-			        <RadioButton text="{i18n>rbAdminRole}" selected="{configModel>/newUserData/isAdmin}"/>
+                <RadioButtonGroup id="rbgRolesId" columns="2" select="onRgbRoleSelect">
+                    <RadioButton 
+                        text="{i18n>rbUserRole}" 
+                        selected="{= !${configModel>/newUserData/isAdmin}}"/>
+                    <RadioButton 
+                        text="{i18n>rbAdminRole}" 
+                        selected="{configModel>/newUserData/isAdmin}"/>
                 </RadioButtonGroup>
+
+                <Label 
+                    text="{i18n>createLastResultLabel}" 
+                    required="true" 
+                    visible="{= !${configModel>/newUserData/isAdmin} }"/>
+                <RadioButtonGroup 
+                    id="rbgResultId" 
+                    columns="2" 
+                    select="onRgbResultSelect" 
+                    visible="{= !${configModel>/newUserData/isAdmin} }">
+			        <RadioButton 
+                        text="{i18n>rbFailResult}" 
+                        selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
+                    <RadioButton 
+                        text="{i18n>rbSuccessResult}" 
+                        selected="{configModel>/newUserData/isAttestationPassed}"/>
+                </RadioButtonGroup>
+
+                <Label 
+                    text="{i18n>createLastDateLabel}" 
+                    visible="{configModel>/newUserData/isAttestationPassed}" 
+                    required="true"/>
+                <DatePicker 
+                    value="{configModel>/newUserData/lastAttestationDate}" 
+                    visible="{configModel>/newUserData/isAttestationPassed}" 
+                    width="100%"/>
+                
+                <Label 
+                    text="{i18n>createTicketLabel}" 
+                    visible="{= !${configModel>/newUserData/isAdmin} }"/>
+                <Input 
+                    value="{configModel>/newUserData/ticket}" 
+                    visible="{= !${configModel>/newUserData/isAdmin} }"/>
             </f:content>
         </f:SimpleForm>
         <buttons>
