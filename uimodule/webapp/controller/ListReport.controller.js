@@ -153,6 +153,12 @@ sap.ui.define([
             })
         },
 
+        onRgbResultSelect() {
+            const oConfigModel = this.getModel("configModel");
+
+            oConfigModel.setProperty("/newUserData/lastAttestationDate", "");
+        },
+
         _authenticateUser(oLoginCredentials) {
             const oModel = this.getModel();
             const oExistingUser = this._verifyLoginUserExist(oLoginCredentials);
@@ -210,6 +216,6 @@ sap.ui.define([
             });
 
             oConfigModel.setProperty("/Departments", aFilterStructure);
-        }
+        },
     });
 });

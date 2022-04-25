@@ -30,14 +30,14 @@
                 <Label text="{i18n>createMobileLabel}" required="true"/>
                 <Input value="{configModel>/newUserData/mobilePhone}"/>
 
-                <Label text="{i18n>createLastDateLabel}"/>
-                <DatePicker value="{configModel>/newUserData/lastAttestationDate}"/>
-
                 <Label text="{i18n>createLastResultLabel}" required="true"/>
-                <RadioButtonGroup id="rbgResultId" columns="2" visible="{= !!${configModel>/newUserData/lastAttestationDate}}">
+                <RadioButtonGroup id="rbgResultId" columns="2"  select="onRgbResultSelect">
 			        <RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
                     <RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
                 </RadioButtonGroup>
+
+                <Label text="{i18n>createLastDateLabel}" visible="{configModel>/newUserData/isAttestationPassed}"/>
+                <DatePicker value="{configModel>/newUserData/lastAttestationDate}" visible="{configModel>/newUserData/isAttestationPassed}" width="100%"/>
 
                 <Label text="{i18n>createRoleLabel}" required="true"/>
                 <RadioButtonGroup id="rbgRolesId" columns="2">
