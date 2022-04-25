@@ -1,7 +1,8 @@
 sap.ui.define([
     "bntu/ohranaTryda/controller/BaseController",
     "sap/m/MessageBox",
-], function (Controller, MessageBox) {
+    "sap/ui/model/json/JSONModel",
+], function (Controller, MessageBox, JSONModel) {
     "use strict";
 
     return Controller.extend("bntu.ohranaTryda.controller.ObjectPage", {
@@ -9,6 +10,10 @@ sap.ui.define([
         onInit() {
             this.getRouter().getRoute("RouteOP").attachPatternMatched(this._onRouteMatched, this);
         },
+
+        onAfterRendering: function() {
+            sap.ui.getCore().byId("container-ohranaTryda---pageOP--ShoppingCartWizard-progressNavigator").setBlocked(true);
+        },  
 
         async _onRouteMatched(oEvent) {
             const oArguments = oEvent.getParameter("arguments");
@@ -27,7 +32,13 @@ sap.ui.define([
             });
         },
 
+        completedHandler: function () {
+            debugger
+			this._oNavContainer.to(this.byId("wizardBranchingReviewPage"));
+		},
+
         navigateToTheListReport() {
+            this.byId("wizardNavContainer").to(this.byId("wizardBranchingReviewPage"));
             this.getRouter().navTo("RouteMainView");
         },
 
@@ -85,5 +96,18 @@ sap.ui.define([
                 this._setAvailableUsers();  
             }
         },
+
+        onStartTest: function() {
+            this.byId("wizardNavContainer").to(this.byId("wizardContentPage"));
+        },
+
+        onNextStep: function() {
+            this.byId("container-ohranaTryda---pageOP--ShoppingCartWizard").nextStep();
+        },
+
+        onCompleteTest: function() {
+            this.byId("wizardNavContainer").to(this.byId("reviewResults"));
+        },
+
     });
 });
