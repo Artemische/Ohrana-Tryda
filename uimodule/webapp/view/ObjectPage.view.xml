@@ -158,7 +158,7 @@
 				</subSections>
 			</ObjectPageSection>
 			
-			<ObjectPageSection titleUppercase="false" id="Employment" title="Аттестация">
+			<ObjectPageSection titleUppercase="false" id="Employment" title="{i18n>testTtl}">
 				<subSections>
 					<ObjectPageSubSection>
 						<m:NavContainer id="wizardNavContainer" height="30em">
