@@ -136,8 +136,15 @@ sap.ui.define([
                 const oControl = item.getControl();
                 const sValue = oControl.getValue ? oControl.getValue() : oControl.getSelectedKey();
 
-                if (sValue) {
-                    aFilters.push(new Filter(oControl.data("prop"), FilterOperator.Contains, sValue));
+                if (oControl.data("prop") === "isAttestationPassed") {
+                    const bValue = (sValue === "Сдано");
+                    if (sValue) {
+                        aFilters.push(new Filter(oControl.data("prop"), FilterOperator.EQ, bValue));
+                    }
+                } else {
+                    if (sValue) {
+                        aFilters.push(new Filter(oControl.data("prop"), FilterOperator.Contains, sValue));
+                    }
                 }
             });
             

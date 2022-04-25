@@ -22,6 +22,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                     name: "",
                     secondName: "",
                     thirdName: "",
+                    ticket: ""
                 }
             });
         },
@@ -48,7 +49,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                 },
 
                 testResults: [
-                    {text: 'Cдано', key: true},
+                    {text: 'Сдано', key: true},
                     {text: 'Не сдано', key: ""}
                 ],
 
