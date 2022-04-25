@@ -38,13 +38,13 @@ sap.ui.define([
         },
 
         /**
-		 * Handle the click event for the breadcrumb and routes to the employees listing page.
-		 * 
-		 * @public
-		 */
-		onListEmployeesBreadcrumbsPress() {
+         * Handle the click event for the breadcrumb and routes to the employees listing page.
+         * 
+         * @public
+         */
+        onListEmployeesBreadcrumbsPress() {
             this.navigateToTheListReport();
-       },
+        },
 
         onEditPress() {
             const oConfigModel = this.getModel("configModel");
