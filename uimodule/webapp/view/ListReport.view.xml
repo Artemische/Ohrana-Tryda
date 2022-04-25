@@ -24,24 +24,28 @@
         <f:header>
             <f:DynamicPageHeader pinnable="true">
                 <f:content>
-                    <fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+                    <fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false" showFilterConfiguration="false">
                         <fb:filterItems>
-                            <fb:FilterItem name="A" label="{i18n>nameFltrLbl}">
-                                <fb:control>
-                                    <Input id="nameFltr" app:prop="name" change="onFilterChange" />
-                                </fb:control>
-                            </fb:FilterItem>
-                            <fb:FilterItem name="B" label="{i18n>sNameFltrLbl}">
+                            <fb:FilterItem name="A" label="{i18n>sNameFltrLbl}">
                                 <fb:control>
                                     <Input id="secondNameFltr" app:prop="secondName" change="onFilterChange" />
                                 </fb:control>
                             </fb:FilterItem>
-                            <fb:FilterItem name="C" label="{i18n>departmentFltrLbl}">
+                            <fb:FilterItem name="B" label="{i18n>departmentFltrLbl}">
                                 <fb:control>
                                     <ComboBox id="departmentFltr" app:prop="department" change="onFilterChange" items="{
                                             path: 'configModel>/Departments'
                                         }">
                                         <core:Item key="{configModel>key}" text="{configModel>value}"/>
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="C" label="{i18n>attestationResultFltrLbl}">
+                                <fb:control>
+                                    <ComboBox id="attestationResultFltr" app:prop="isAttestationPassed" change="onFilterChange" items="{
+                                            path: 'configModel>/testResults'
+                                        }">
+                                        <core:Item key="{configModel>key}" text="{configModel>text}"/>
                                     </ComboBox>
                                 </fb:control>
                             </fb:FilterItem>
@@ -72,11 +76,11 @@
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns>
-                    <Column minScreenWidth="Phone" demandPopin="true">
-                        <Text text="{i18n>nameColumn}"/>
-                    </Column>
                     <Column minScreenWidth="Tablet" demandPopin="true">
                         <Text text="{i18n>sNameColumn}"/>
+                    </Column>
+                    <Column minScreenWidth="Phone" demandPopin="true">
+                        <Text text="{i18n>nameColumn}"/>
                     </Column>
                     <Column minScreenWidth="Tablet" demandPopin="true">
                         <Text text="{i18n>departmentColumn}"/>
@@ -89,8 +93,8 @@
                 <items>
                     <ColumnListItem type="Navigation" vAlign="Middle" press="onLineItemPress" >
                         <cells>
-                            <Text text="{name}"/>
                             <Text text="{secondName}"/>
+                            <Text text="{name}"/>
                             <Text text="{department}"/>
                             <ObjectStatus 
                                 text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" 
