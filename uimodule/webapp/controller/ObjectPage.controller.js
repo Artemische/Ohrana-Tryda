@@ -11,7 +11,7 @@ sap.ui.define([
             this.getRouter().getRoute("RouteOP").attachPatternMatched(this._onRouteMatched, this);
         },
 
-        onAfterRendering: function() {
+        onAfterRendering() {
             sap.ui.getCore().byId("container-ohranaTryda---pageOP--ShoppingCartWizard-progressNavigator").setBlocked(true);
         },  
 
