@@ -47,9 +47,31 @@ sap.ui.define([
 		 * 
 		 * @public
 		 */
-		onListEmployeesBreadcrumbsPress: function() {
+		onListEmployeesBreadcrumbsPress() {
             this.navigateToTheListReport();
 		},
+
+        onEditPress() {
+            const oConfigModel = this.getModel("configModel");
+            const oUserData = {
+                ...this.getView().getBindingContext().getObject()
+            };
+
+            oConfigModel.setProperty("/userCashData", oUserData);
+            oConfigModel.setProperty("/editMode", true);
+        },
+
+        onFooterActionPress(oEvent, bCancel) {
+            const oConfigModel = this.getModel("configModel");
+
+            if (bCancel) {
+                const sPath = this.getView().getBindingContext().getPath();
+                
+                this.getModel().setProperty(sPath, oConfigModel.getProperty("/userCashData"));
+            }
+
+            oConfigModel.setProperty("/editMode", false);
+        },
 
         onDeletePress() {
             const sWarningMessage = this.getResourceBundle().getText("deleteUserText");
@@ -79,6 +101,15 @@ sap.ui.define([
                     this.navigateToTheListReport();
                 }
             });
+        },
+
+        onResultChange(oEvent) {
+            const oModel = this.getModel();
+            const oSelectedItem = oEvent.getSource().getSelectedItem();
+            const bKey = oSelectedItem.getBindingContext("configModel").getObject().key;
+            const sPath = this.getView().getBindingContext().getPath();
+            
+            oModel.setProperty(`${sPath}/isAttestationPassed`, bKey);
         },
         
         _getSelectedUserId(oUsers) {
