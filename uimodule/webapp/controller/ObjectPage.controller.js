@@ -123,15 +123,15 @@ sap.ui.define([
             }
         },
 
-        onStartTest: function() {
+        onStartTest() {
             this.byId("wizardNavContainer").to(this.byId("wizardContentPage"));
         },
 
-        onNextStep: function() {
+        onNextStep() {
             this.byId("container-ohranaTryda---pageOP--ShoppingCartWizard").nextStep();
         },
 
-        onCompleteTest: function() {
+        onCompleteTest() {
             this.byId("wizardNavContainer").to(this.byId("reviewResults"));
         },
 
