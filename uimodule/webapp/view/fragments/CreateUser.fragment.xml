@@ -4,7 +4,8 @@
     xmlns:core="sap.ui.core">
     <Dialog
         id="createUserDialogId"
-        title="{i18n>createUserDialogTitle}">
+        title="{i18n>createUserDialogTitle}"
+        contentWidth="500px">
         <f:SimpleForm
             maxContainerCols="1"
             layout="ResponsiveGridLayout"
