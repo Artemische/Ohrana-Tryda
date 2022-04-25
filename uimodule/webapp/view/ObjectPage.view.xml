@@ -161,7 +161,6 @@
 									showHeader="false">
 									<m:content>
 										<m:Wizard id="ShoppingCartWizard"
-											complete="completedHandler"
 											enableBranching="true"
 											renderMode="Page"
 											showNextButton="false"

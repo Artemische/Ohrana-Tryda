@@ -32,24 +32,19 @@ sap.ui.define([
             });
         },
 
-        completedHandler: function () {
-            debugger
-			this._oNavContainer.to(this.byId("wizardBranchingReviewPage"));
-		},
-
         navigateToTheListReport() {
             this.byId("wizardNavContainer").to(this.byId("wizardBranchingReviewPage"));
             this.getRouter().navTo("RouteMainView");
         },
 
         /**
-		 * Handle the click event for the breadcrumb and routes to the employees listing page.
-		 * 
-		 * @public
-		 */
-		onListEmployeesBreadcrumbsPress: function() {
+         * Handle the click event for the breadcrumb and routes to the employees listing page.
+         * 
+         * @public
+         */
+        onListEmployeesBreadcrumbsPress: function() {
             this.navigateToTheListReport();
-		},
+       },
 
         onDeletePress() {
             const sWarningMessage = this.getResourceBundle().getText("deleteUserText");
