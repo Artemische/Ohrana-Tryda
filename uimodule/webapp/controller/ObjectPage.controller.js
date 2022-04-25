@@ -1,7 +1,8 @@
 sap.ui.define([
     "bntu/ohranaTryda/controller/BaseController",
     "sap/m/MessageBox",
-], function (Controller, MessageBox) {
+    "sap/ui/model/json/JSONModel",
+], function (Controller, MessageBox, JSONModel) {
     "use strict";
 
     return Controller.extend("bntu.ohranaTryda.controller.ObjectPage", {
@@ -9,6 +10,10 @@ sap.ui.define([
         onInit() {
             this.getRouter().getRoute("RouteOP").attachPatternMatched(this._onRouteMatched, this);
         },
+
+        onAfterRendering() {
+            sap.ui.getCore().byId("container-ohranaTryda---pageOP--ShoppingCartWizard-progressNavigator").setBlocked(true);
+        },  
 
         async _onRouteMatched(oEvent) {
             const oArguments = oEvent.getParameter("arguments");
@@ -28,17 +33,18 @@ sap.ui.define([
         },
 
         navigateToTheListReport() {
+            this.byId("wizardNavContainer").to(this.byId("wizardBranchingReviewPage"));
             this.getRouter().navTo("RouteMainView");
         },
 
         /**
-		 * Handle the click event for the breadcrumb and routes to the employees listing page.
-		 * 
-		 * @public
-		 */
-		onListEmployeesBreadcrumbsPress() {
+         * Handle the click event for the breadcrumb and routes to the employees listing page.
+         * 
+         * @public
+         */
+        onListEmployeesBreadcrumbsPress() {
             this.navigateToTheListReport();
-		},
+        },
 
         onEditPress() {
             const oConfigModel = this.getModel("configModel");
@@ -116,5 +122,18 @@ sap.ui.define([
                 this._setAvailableUsers();  
             }
         },
+
+        onStartTest() {
+            this.byId("wizardNavContainer").to(this.byId("wizardContentPage"));
+        },
+
+        onNextStep() {
+            this.byId("container-ohranaTryda---pageOP--ShoppingCartWizard").nextStep();
+        },
+
+        onCompleteTest() {
+            this.byId("wizardNavContainer").to(this.byId("reviewResults"));
+        },
+
     });
 });

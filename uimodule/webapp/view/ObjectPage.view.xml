@@ -157,60 +157,114 @@
 					</ObjectPageSubSection>
 				</subSections>
 			</ObjectPageSection>
-			<ObjectPageSection titleUppercase="false" id="Employment" title="Вопросы">
+			
+			<ObjectPageSection titleUppercase="false" id="Employment" title="{i18n>testTtl}">
 				<subSections>
-					<ObjectPageSubSection titleUppercase="false">
-						<f:SimpleForm editable="true" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
-							<f:content>
-								<m:Label text="как назваеься поошрама серьезность если она будешь?"/>
-								<m:RadioButtonGroup id="rbg2" columns="1" class="sapUiMediumMarginBottom">
-									<m:RadioButton id="RB2-1" text="Option 1" />
-									<m:RadioButton id="RB2-2" text="Option 2" />
-									<m:RadioButton id="RB2-3" text="Option 3" />
-									<m:RadioButton id="RB2-31" text="Option 4" />
-								</m:RadioButtonGroup>
-
-								<m:Label text="как назваеься поошрама серьезность если она будешь?"/>
-								<m:RadioButtonGroup id="rbg27" columns="1" class="sapUiMediumMarginBottom">
-									<m:RadioButton id="R5345B2-1" text="Option 1" />
-									<m:RadioButton id="RB2-5342" text="Option 2" />
-									<m:RadioButton id="RB25345-3" text="Option 3" />
-									<m:RadioButton id="RB27-31" text="Option 4" />
-								</m:RadioButtonGroup>
-
-								<m:Label text="как назваеься поошрама серьезность если она будешь?"/>
-								<m:RadioButtonGroup id="rbewg2" columns="1" class="sapUiMediumMarginBottom">
-									<m:RadioButton id="RB2fwe-1" text="Option 1" />
-									<m:RadioButton id="RB2eq-2" text="Option 2" />
-									<m:RadioButton id="RB2feq-3" text="Option 3" />
-									<m:RadioButton id="RB2f-31" text="Option 4" />
-								</m:RadioButtonGroup>
-
-								<m:Label text="как назваеься поошрама серьезность если она будешь?"/>
-								<m:RadioButtonGroup id="rb5g2" columns="1" class="sapUiMediumMarginBottom">
-									<m:RadioButton id="RB2-13" text="Option 1" />
-									<m:RadioButton id="RB2r-2" text="Option 2" />
-									<m:RadioButton id="RB2s-3" text="Option 3" />
-									<m:RadioButton id="RB2ww-31" text="Option 4" />
-								</m:RadioButtonGroup>
-
-								<m:Label text="как назваеься поошрама серьезность если она будешь?"/>
-								<m:RadioButtonGroup id="r6bg2" columns="1" class="sapUiMediumMarginBottom">
-									<m:RadioButton id="RB2-f1" text="Option 1" />
-									<m:RadioButton id="RB2fs-2" text="Option 2" />
-									<m:RadioButton id="RB2j-3" text="Option 3" />
-									<m:RadioButton id="RnB2-31" text="Option 4" />
-								</m:RadioButtonGroup>
-
-								<m:Label text="как назваеься поошрама серьезность если она будешь?"/>
-								<m:RadioButtonGroup id="rhqbg2" columns="1" class="sapUiMediumMarginBottom">
-									<m:RadioButton id="RB2-1df" text="Option 1" />
-									<m:RadioButton id="RBq2-2" text="Option 2" />
-									<m:RadioButton id="RB2-wq3" text="Option 3" />
-									<m:RadioButton id="RB2-w31" text="Option 4" />
-								</m:RadioButtonGroup>
-							</f:content>
-						</f:SimpleForm>
+					<ObjectPageSubSection>
+						<m:NavContainer id="wizardNavContainer" height="30em">
+							<m:pages>
+								<m:Page id="wizardBranchingReviewPage" showHeader="false">
+									<m:content>
+										<m:VBox>
+											<m:Button text="Пройти аттестацию!" press="onStartTest" width="100%"/>
+										</m:VBox>
+									</m:content>
+								</m:Page>
+								<m:Page
+									id="wizardContentPage"
+									showHeader="false">
+									<m:content>
+										<m:Wizard id="ShoppingCartWizard"
+											enableBranching="true"
+											renderMode="Page"
+											showNextButton="false"
+											class="sapUiResponsivePadding--header sapUiResponsivePadding--content">
+											<m:WizardStep
+												id="ContentsStep"
+												nextStep="PaymentTypeStep">
+												<m:VBox>
+													<m:Text class="sapUiSmallMarginBottom"
+															text="Что самое главное в охране труда?"/>
+													<m:RadioButtonGroup id="rbgResultId" columns="1">
+														<m:RadioButton text="Безопасность"/>
+														<m:RadioButton text="Правила"/>
+														<m:RadioButton text="Соблюдения закона"/>
+														<m:RadioButton text="Всё перечисленное"/>
+													</m:RadioButtonGroup>
+													<m:Button text="Следующий" press="onNextStep"/>
+												</m:VBox>
+											</m:WizardStep>
+											<m:WizardStep
+												id="PaymentTypeStep"
+												nextStep="CreditCardStep">
+												<m:VBox>
+													<m:Text class="sapUiSmallMarginBottom"
+															text="Что самое главное в охране труда?"/>
+													<m:RadioButtonGroup id="rbgResgultId" columns="1">
+														<m:RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+													</m:RadioButtonGroup>
+													<m:Button text="Следующий" press="onNextStep"/>
+												</m:VBox>
+											</m:WizardStep>
+											<m:WizardStep
+												id="CreditCardStep"
+												nextStep="BankAccountStep">
+												<m:VBox>
+													<m:Text class="sapUiSmallMarginBottom"
+															text="Что самое главное в охране труда?"/>
+													<m:RadioButtonGroup id="rbgResultaId" columns="1">
+														<m:RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+													</m:RadioButtonGroup>
+													<m:Button text="Следующий" press="onNextStep"/>
+												</m:VBox>
+											</m:WizardStep>
+											<m:WizardStep
+												id="BankAccountStep"
+												nextStep="CashOnDeliveryStep">
+												<m:VBox>
+													<m:Text class="sapUiSmallMarginBottom"
+															text="Что самое главное в охране труда?"/>
+													<m:RadioButtonGroup id="rbgRddesultId" columns="1">
+														<m:RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+													</m:RadioButtonGroup>
+													<m:Button text="Следующий" press="onNextStep"/>
+												</m:VBox>
+											</m:WizardStep>
+											<m:WizardStep
+												id="CashOnDeliveryStep">
+												<m:VBox>
+													<m:Text class="sapUiSmallMarginBottom"
+															text="Что самое главное в охране труда?"/>
+													<m:RadioButtonGroup id="rbgResdultId" columns="1">
+														<m:RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
+													</m:RadioButtonGroup>
+													<m:Button text="Показать результат" press="onCompleteTest"/>
+												</m:VBox>
+											</m:WizardStep>
+										</m:Wizard>
+									</m:content>
+								</m:Page>
+								<m:Page id="reviewResults" showHeader="false">
+									<m:content>
+										<m:VBox>
+											<m:Text text="Результаты аттестации" textAlign="Center" width="100%"/>
+										</m:VBox>
+									</m:content>
+								</m:Page>
+							</m:pages>
+						</m:NavContainer>
 					</ObjectPageSubSection>
 				</subSections>
 			</ObjectPageSection>
