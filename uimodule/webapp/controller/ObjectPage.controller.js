@@ -91,6 +91,15 @@ sap.ui.define([
                 }
             });
         },
+
+        onResultChange(oEvent) {
+            const oModel = this.getModel();
+            const oSelectedItem = oEvent.getSource().getSelectedItem();
+            const bKey = oSelectedItem.getBindingContext("configModel").getObject().key;
+            const sPath = this.getView().getBindingContext().getPath();
+            
+            oModel.setProperty(`${sPath}/isAttestationPassed`, bKey);
+        },
         
         _getSelectedUserId(oUsers) {
             return Object.entries(oUsers).find(([key, value]) => value.mobilePhone.toString() === this.sId)[0];

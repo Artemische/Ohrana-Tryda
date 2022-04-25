@@ -51,7 +51,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
 
                 testResults: [
                     {text: 'Сдано', key: true},
-                    {text: 'Не сдано', key: ""}
+                    {text: 'Не сдано', key: false}
                 ],
 
                 userCashData: {

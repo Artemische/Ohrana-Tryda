@@ -118,7 +118,7 @@
 									<f:formElements>
 										<f:FormElement label="{i18n>testResultLbl}">
 											<f:fields>
-												<m:Select visible="{configModel>/editMode}" selectedKey="{isAttestationPassed}" items="{configModel>/testResults}" >
+												<m:Select visible="{configModel>/editMode}" selectedKey="{isAttestationPassed}" items="{configModel>/testResults}"  change="onResultChange">
 													<m:items>
 														<core:Item text="{configModel>text}" key="{configModel>key}" />
 													</m:items>
