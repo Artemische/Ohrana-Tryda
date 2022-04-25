@@ -87,16 +87,16 @@
 							<f:formContainers>
 								<f:FormContainer id="commonInfo" title="{i18n>commonInfoTtl}">
 									<f:formElements>
-										<f:FormElement label="{i18n>nameLbl}">
-											<f:fields>
-												<m:Input value="{name}" visible="{configModel>/editMode}" />
-												<m:Text text="{name}" visible="{= !${configModel>/editMode}}" />
-											</f:fields>
-										</f:FormElement>
 										<f:FormElement label="{i18n>snameLbl}">
 											<f:fields>
 												<m:Input value="{secondName}" visible="{configModel>/editMode}" />
 												<m:Text text="{secondName}" visible="{= !${configModel>/editMode}}" />
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="{i18n>nameLbl}">
+											<f:fields>
+												<m:Input value="{name}" visible="{configModel>/editMode}" />
+												<m:Text text="{name}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 										<f:FormElement label="{i18n>tnameLbl}">
