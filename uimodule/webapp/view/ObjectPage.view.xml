@@ -132,10 +132,10 @@
 												<m:Text text="{lastAttestationDate}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
-										<f:FormElement label="{i18n>testNumberLbl}" visible="{isAdmin}">
+										<f:FormElement label="{i18n>testNumberLbl}" visible="{/isAdmin/isAdmin}">
 											<f:fields>
 												<m:Input value="{ticket}" visible="{configModel>/editMode}" />
-												<m:Text text="{ticket}" visible="{= !${configModel>/editMode}}" />
+												<m:Text text="{= ${ticket} || ${i18n>defaultTicketValue} }" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 									</f:formElements>
