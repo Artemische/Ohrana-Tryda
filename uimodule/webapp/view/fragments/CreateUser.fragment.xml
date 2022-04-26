@@ -36,7 +36,7 @@
                 <MaskInput 
                     mask="(99) 999 9999" 
                     placeholderSymbol="_" 
-                    placeholder="Введите номер телефона" 
+                    placeholder="{i18n>mobilePlaceholder}" 
                     showClearIcon="true" 
                     value="{configModel>/newUserData/mobilePhone}" />
 
