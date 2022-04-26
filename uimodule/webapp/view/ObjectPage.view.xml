@@ -173,14 +173,14 @@
 									<m:content>
 										<m:VBox>
 											<m:MessageStrip
-												text="Номер билета не выбран!"
+												text="{i18n>messageStripText}"
 												type="Warning"
 												showIcon="true"
 												visible="{= 1 > ${ticket}}"
 												class="sapUiMediumMarginBottom">
 											</m:MessageStrip>
 											<m:Button 
-												text="Пройти аттестацию!" 
+												text="{i18n>doTestBtn}" 
 												enabled="{= ${ticket} > 0}" 
 												press="onStartTestConfirmation" 
 												width="100%"/>
