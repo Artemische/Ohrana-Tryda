@@ -33,7 +33,12 @@
                 <Input value="{configModel>/newUserData/department}"/>
 
                 <Label text="{i18n>createMobileLabel}" required="true"/>
-                <Input value="{configModel>/newUserData/mobilePhone}"/>
+                <MaskInput 
+                    mask="(99) 999 9999" 
+                    placeholderSymbol="_" 
+                    placeholder="Введите номер телефона" 
+                    showClearIcon="true" 
+                    value="{configModel>/newUserData/mobilePhone}" />
 
                 <Label text="{i18n>createRoleLabel}" />
                 <RadioButtonGroup id="rbgRolesId" columns="2" select="onRgbRoleSelect">
