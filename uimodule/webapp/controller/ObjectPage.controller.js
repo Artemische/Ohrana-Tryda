@@ -58,11 +58,18 @@ sap.ui.define([
 
         onFooterActionPress(oEvent, bCancel) {
             const oConfigModel = this.getModel("configModel");
+            const aUsers = this.getModel().getProperty("/Users");
+            const sSelectedUserId = this._getSelectedUserId(aUsers);
+            const oCtx = this.getView().getBindingContext();
 
             if (bCancel) {
-                const sPath = this.getView().getBindingContext().getPath();
+                const sPath = oCtx.getPath();
                 
                 this.getModel().setProperty(sPath, oConfigModel.getProperty("/userCashData"));
+            } else {
+                const oUser = oCtx.getObject();
+
+                this.updateBaseRequest(`Users/${sSelectedUserId}`, oUser);
             }
 
             oConfigModel.setProperty("/editMode", false);
@@ -84,8 +91,8 @@ sap.ui.define([
         },
 
         async deleteUser() {
-            const oUsers = this.getModel().getProperty("/Users");
-            const sSelectedUserId = this._getSelectedUserId(oUsers);
+            const aUsers = this.getModel().getProperty("/Users");
+            const sSelectedUserId = this._getSelectedUserId(aUsers);
             const sSuccessMessage = this.getResourceBundle().getText("successUserDeletionMsg");
             const sSuccessTitle = this.getResourceBundle().getText("successUserDeletionTitle");
 
