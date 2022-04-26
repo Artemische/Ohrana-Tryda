@@ -166,6 +166,14 @@ sap.ui.define([
             oConfigModel.setProperty("/newUserData/lastAttestationDate", "");
         },
 
+        handleCreateUserDialogEscape() {
+            this.closeCreateUserDialog();
+        },
+
+        handleLoginDialogEscape() {
+            this.closeLoginDialog();
+        },
+
         onRgbRoleSelect() {
             const oConfigModel = this.getModel("configModel");
 

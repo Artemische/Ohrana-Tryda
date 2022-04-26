@@ -15,6 +15,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                 AvailableUsers: [],
                 ActiveUser: {
                     department: "",
+                    email: "",
                     isAdmin: false,
                     isAttestationPassed: false,
                     lastAttestationDate: "",
@@ -39,6 +40,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
             
                 newUserData: {
                     department: "",
+                    email: "",
                     isAdmin: false,
                     lastAttestationDate: "",
                     isAttestationPassed: false,

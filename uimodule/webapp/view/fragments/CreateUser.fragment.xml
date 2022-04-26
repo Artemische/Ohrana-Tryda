@@ -5,7 +5,8 @@
     <Dialog
         id="createUserDialogId"
         title="{i18n>createUserDialogTitle}"
-        contentWidth="500px">
+        contentWidth="500px"
+        escapeHandler=".handleCreateUserDialogEscape">
         <f:SimpleForm
             maxContainerCols="1"
             layout="ResponsiveGridLayout"
@@ -24,6 +25,9 @@
 
                 <Label text="{i18n>createThirdNameLabel}" required="true"/>
                 <Input value="{configModel>/newUserData/thirdName}"/>
+
+                <Label text="{i18n>createEmailLabel}"/>
+                <Input value="{configModel>/newUserData/email}"/>
 
                 <Label text="{i18n>createDepartmentLabel}" required="true"/>
                 <Input value="{configModel>/newUserData/department}"/>

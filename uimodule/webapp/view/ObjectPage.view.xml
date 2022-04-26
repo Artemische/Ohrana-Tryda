@@ -145,8 +145,8 @@
 										</f:FormElement>
 										<f:FormElement label="{i18n>emailLbl}">
 											<f:fields>
-												<m:Input value="{mail}" visible="{configModel>/editMode}" />
-												<m:Text text="{mail}" visible="{= !${configModel>/editMode}}" />
+												<m:Input value="{email}" visible="{configModel>/editMode}" />
+												<m:Text text="{email}" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
 
