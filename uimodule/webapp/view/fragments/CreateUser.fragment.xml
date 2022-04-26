@@ -35,7 +35,7 @@
                 <Label text="{i18n>createMobileLabel}" required="true"/>
                 <Input value="{configModel>/newUserData/mobilePhone}"/>
 
-                <Label text="{i18n>createRoleLabel}" required="true"/>
+                <Label text="{i18n>createRoleLabel}" />
                 <RadioButtonGroup id="rbgRolesId" columns="2" select="onRgbRoleSelect">
                     <RadioButton 
                         text="{i18n>rbUserRole}" 
@@ -47,7 +47,6 @@
 
                 <Label 
                     text="{i18n>createLastResultLabel}" 
-                    required="true" 
                     visible="{= !${configModel>/newUserData/isAdmin} }"/>
                 <RadioButtonGroup 
                     id="rbgResultId" 
@@ -67,6 +66,7 @@
                     visible="{configModel>/newUserData/isAttestationPassed}" 
                     required="true"/>
                 <DatePicker 
+                    displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy"
                     value="{configModel>/newUserData/lastAttestationDate}" 
                     visible="{configModel>/newUserData/isAttestationPassed}" 
                     width="100%"/>
@@ -80,7 +80,8 @@
             </f:content>
         </f:SimpleForm>
         <buttons>
-            <Button text="{i18n>createSubmitButton}" press="onSubmitPress" type="Accept"/>
+            <Button text="{i18n>createSubmitButton}" press="onSubmitPress" type="Accept"
+                enabled="{= !!${configModel>/newUserData/name} &amp;&amp; !!${configModel>/newUserData/secondName} &amp;&amp; !!${configModel>/newUserData/thirdName} &amp;&amp; !!${configModel>/newUserData/department} &amp;&amp; !!${configModel>/newUserData/mobilePhone}}" />
             <Button text="{i18n>createCancelButton}" press="onCreateCancelPress" type="Reject"/>
         </buttons>
     </Dialog>
