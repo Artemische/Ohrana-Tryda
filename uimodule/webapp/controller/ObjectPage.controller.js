@@ -1,20 +1,13 @@
 sap.ui.define([
     "bntu/ohranaTryda/controller/BaseController",
-    "sap/m/MessageBox",
-    "sap/ui/model/json/JSONModel",
-], function (Controller, MessageBox, JSONModel) {
+    "sap/m/MessageBox"
+], function (Controller, MessageBox) {
     "use strict";
 
     return Controller.extend("bntu.ohranaTryda.controller.ObjectPage", {
         
         onInit() {
             this.getRouter().getRoute("RouteOP").attachPatternMatched(this._onRouteMatched, this);
-
-            var oAppMode = new JSONModel({
-                isSetTest: false
-            });
-            this.oAppMode = oAppMode;
-            this.getView().setModel(oAppMode, "appMode");
         },
 
         async _onRouteMatched(oEvent) {
