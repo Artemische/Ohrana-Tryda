@@ -1,8 +1,7 @@
 sap.ui.define([
     "bntu/ohranaTryda/controller/BaseController",
-    "sap/m/MessageBox",
-    "sap/ui/model/json/JSONModel",
-], function (Controller, MessageBox, JSONModel) {
+    "sap/m/MessageBox"
+], function (Controller, MessageBox) {
     "use strict";
 
     return Controller.extend("bntu.ohranaTryda.controller.ObjectPage", {
@@ -10,10 +9,6 @@ sap.ui.define([
         onInit() {
             this.getRouter().getRoute("RouteOP").attachPatternMatched(this._onRouteMatched, this);
         },
-
-        onAfterRendering() {
-            sap.ui.getCore().byId("container-ohranaTryda---pageOP--ShoppingCartWizard-progressNavigator").setBlocked(true);
-        },  
 
         async _onRouteMatched(oEvent) {
             const oArguments = oEvent.getParameter("arguments");
@@ -24,16 +19,18 @@ sap.ui.define([
             await this._authorizeUser();
             
             aItems = this.getModel().getProperty("/AvailableUsers");
-            sIndex = aItems.findIndex(el => el.mobilePhone.toString() === sId );
+            sIndex = aItems.findIndex(oElem => oElem.mobilePhone.toString() === sId );
 
             this.sId= sId;
             this.getView().bindElement({
                 path: `/AvailableUsers/${sIndex}`
             });
+
+            this.byId("container-ohranaTryda---pageOP--ShoppingCartWizard-progressNavigator").setBlocked(true);
+            this.byId("wizardNavContainer").to(this.byId("wizardBranchingReviewPage"));
         },
 
         navigateToTheListReport() {
-            this.byId("wizardNavContainer").to(this.byId("wizardBranchingReviewPage"));
             this.getRouter().navTo("RouteMainView");
         },
 
@@ -88,6 +85,21 @@ sap.ui.define([
                     action === sDeleteAction ? this.deleteUser() : null;
                 }
             })
+        },
+
+        onStartTestConfirmation() {
+            const sTitle = this.getResourceBundle().getText("titleConfirmMsg");
+            const sText = this.getResourceBundle().getText("textConfirmMsg");
+            const sYesMessage = this.getResourceBundle().getText("yesMsg");
+            const sNoMessage = this.getResourceBundle().getText("noMsg");
+
+            MessageBox.confirm(sText, {
+                title: sTitle,
+                actions: [sYesMessage, sNoMessage],
+                onClose: (sAction) => {
+                    if(sAction === sYesMessage) { this.onStartTest() }
+                }
+            });
         },
 
         async deleteUser() {
