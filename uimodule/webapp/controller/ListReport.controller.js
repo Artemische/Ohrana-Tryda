@@ -23,7 +23,7 @@ sap.ui.define([
                 oModel.setProperty("/ActiveUser", oActiveUser);
                 this._setAvailableUsers();  
             } else {
-                this.openLoginDialog()
+                this.openLoginDialog();
             }
 
             this._setDepartmentFilterValues(Object.values(oUsers));
@@ -161,7 +161,7 @@ sap.ui.define([
             })
         },
 
-        onRgbResultSelect() {
+        onRbgResultSelect() {
             const oConfigModel = this.getModel("configModel");
 
             oConfigModel.setProperty("/newUserData/lastAttestationDate", "");
@@ -175,7 +175,7 @@ sap.ui.define([
             this.closeLoginDialog();
         },
 
-        onRgbRoleSelect() {
+        onRbgRoleSelect() {
             const oConfigModel = this.getModel("configModel");
 
             oConfigModel.setProperty("/newUserData/lastAttestationDate", "");
@@ -202,9 +202,8 @@ sap.ui.define([
             const oModel = this.getModel();
             const aUsers = Object.values(oModel.getData().Users);
 
-            return aUsers.find(oUser => oUser.name.toLowerCase().trim() === oLoginUser.name.toLowerCase().trim() && 
-                oUser.secondName.toLowerCase().trim() === oLoginUser.secondName.toLowerCase().trim() &&
-                oUser.thirdName.toLowerCase().trim() === oLoginUser.thirdName.toLowerCase().trim());
+            return aUsers.find(oUser => oUser.secondName.toLowerCase().trim() === oLoginUser.secondName.toLowerCase().trim() &&
+                oUser.mobilePhone.toString().trim() === oLoginUser.mobilePhone.toString().trim());
 
         },
 

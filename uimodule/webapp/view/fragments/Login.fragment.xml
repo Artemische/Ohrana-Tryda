@@ -17,13 +17,10 @@
             columnsM="1">
             <f:content>
                 <Label text="{i18n>loginSecondNameLabel}" required="true"/>
-                <Input id="loginSecondNameFieldId" value="{configModel>/authData/secondName}"/>
+                <Input value="{configModel>/authData/secondName}"/>
 
-                <Label text="{i18n>loginNameLabel}" required="true"/>
-                <Input id="loginFirstNameFieldId" value="{configModel>/authData/name}"/>
-
-                <Label text="{i18n>loginThirdNameLabel}" required="true"/>
-                <Input id="loginThirdNameFieldId" value="{configModel>/authData/thirdName}"/>
+                <Label text="{i18n>loginMobileLabel}" required="true"/>
+                <Input value="{configModel>/authData/mobilePhone}"/>
             </f:content>
         </f:SimpleForm>
         <buttons>

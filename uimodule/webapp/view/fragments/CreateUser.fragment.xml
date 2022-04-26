@@ -41,7 +41,7 @@
                     value="{configModel>/newUserData/mobilePhone}" />
 
                 <Label text="{i18n>createRoleLabel}" />
-                <RadioButtonGroup id="rbgRolesId" columns="2" select="onRgbRoleSelect">
+                <RadioButtonGroup id="rbgRolesId" columns="2" select="onRbgRoleSelect">
                     <RadioButton 
                         text="{i18n>rbUserRole}" 
                         selected="{= !${configModel>/newUserData/isAdmin}}"/>
@@ -56,7 +56,7 @@
                 <RadioButtonGroup 
                     id="rbgResultId" 
                     columns="2" 
-                    select="onRgbResultSelect" 
+                    select="onRbgResultSelect" 
                     visible="{= !${configModel>/newUserData/isAdmin} }">
 			        <RadioButton 
                         text="{i18n>rbFailResult}" 
