@@ -164,7 +164,11 @@
 				</subSections>
 			</ObjectPageSection>
 			
-			<ObjectPageSection titleUppercase="false" id="Employment" title="{i18n>testTtl}">
+			<ObjectPageSection 
+				titleUppercase="false" 
+				id="Employment" 
+				title="{i18n>testTtl}"
+				visible="{= !${isAdmin}}">
 				<subSections>
 					<ObjectPageSubSection>
 						<m:NavContainer id="wizardNavContainer" height="30em">
