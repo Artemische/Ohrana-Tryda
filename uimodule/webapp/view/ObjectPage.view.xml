@@ -176,12 +176,12 @@
 												text="{i18n>messageStripText}"
 												type="Warning"
 												showIcon="true"
-												visible="{= 1 > ${ticket}}"
+												visible="{= !${ticket}}"
 												class="sapUiMediumMarginBottom">
 											</m:MessageStrip>
 											<m:Button 
 												text="{i18n>doTestBtn}" 
-												enabled="{= ${ticket} > 0}" 
+												enabled="{= !!${ticket}}" 
 												press="onStartTestConfirmation" 
 												width="100%"/>
 										</m:VBox>
