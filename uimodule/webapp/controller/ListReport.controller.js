@@ -81,11 +81,17 @@ sap.ui.define([
         },
 
         async onSubmitPress() {
+            const oModel = this.getModel();
             const oNewUser = this.getModel("configModel").getProperty("/newUserData");
             const sSuccessUserCreationMessage = this.getResourceBundle().getText("successUserCreationMsg");
             const sSuccessUserCreationTitle = this.getResourceBundle().getText("successUserCreationTitle");
 
-            await this.createBaseRequest("Users/", oNewUser);
+            try {
+                await this.createBaseRequest("Users/", oNewUser);
+                oModel.setProperty("/AvailableUsers", [...oModel.getProperty("/AvailableUsers"), {...oNewUser}]);
+            } catch(err) {
+                console.log(err);
+            }
 
             MessageBox.success(sSuccessUserCreationMessage, {
                 title: sSuccessUserCreationTitle,
