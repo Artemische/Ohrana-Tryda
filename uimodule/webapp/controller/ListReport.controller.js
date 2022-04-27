@@ -2,9 +2,10 @@ sap.ui.define([
     "bntu/ohranaTryda/controller/BaseController",
     "sap/ui/core/Fragment",
     "sap/m/MessageBox",
+    "sap/m/MessageToast",
     "sap/ui/model/Filter", 
     "sap/ui/model/FilterOperator",
-], function (Controller, Fragment, MessageBox, Filter, FilterOperator) {
+], function (Controller, Fragment, MessageBox, MessageToast, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("bntu.ohranaTryda.controller.ListReport", {
@@ -22,7 +23,7 @@ sap.ui.define([
                 oModel.setProperty("/ActiveUser", oActiveUser);
                 this._setAvailableUsers();  
             } else {
-                this.openLoginDialog()
+                this.openLoginDialog();
             }
 
             this._setDepartmentFilterValues(Object.values(oUsers));
@@ -166,7 +167,7 @@ sap.ui.define([
             })
         },
 
-        onRgbResultSelect() {
+        onRbgResultSelect() {
             const oConfigModel = this.getModel("configModel");
 
             oConfigModel.setProperty("/newUserData/lastAttestationDate", "");
@@ -180,7 +181,7 @@ sap.ui.define([
             this.closeLoginDialog();
         },
 
-        onRgbRoleSelect() {
+        onRbgRoleSelect() {
             const oConfigModel = this.getModel("configModel");
 
             oConfigModel.setProperty("/newUserData/lastAttestationDate", "");
@@ -197,6 +198,7 @@ sap.ui.define([
                 oModel.setProperty("/ActiveUser", oExistingUser);
                 this._setAvailableUsers();
                 this.closeLoginDialog();
+                this._showGreeting(oExistingUser);
             } else {
                 this.handleLoginException();
             }
@@ -206,9 +208,8 @@ sap.ui.define([
             const oModel = this.getModel();
             const aUsers = Object.values(oModel.getData().Users);
 
-            return aUsers.find(oUser => oUser.name.toLowerCase().trim() === oLoginUser.name.toLowerCase().trim() && 
-                oUser.secondName.toLowerCase().trim() === oLoginUser.secondName.toLowerCase().trim() &&
-                oUser.thirdName.toLowerCase().trim() === oLoginUser.thirdName.toLowerCase().trim());
+            return aUsers.find(oUser => oUser.secondName.toLowerCase().trim() === oLoginUser.secondName.toLowerCase().trim() &&
+                oUser.mobilePhone.toString().trim() === oLoginUser.mobilePhone.toString().trim());
 
         },
 
@@ -245,6 +246,14 @@ sap.ui.define([
             });
 
             oConfigModel.setProperty("/Departments", aFilterStructure);
+        },
+
+        _showGreeting(oExistingUser) {
+            const sName = oExistingUser.name;
+            const sThirdName = oExistingUser.thirdName;
+            const sGreetingMsg = this.getResourceBundle().getText("greetingText", [sName, sThirdName]);
+
+            MessageToast.show(sGreetingMsg);
         },
     });
 });

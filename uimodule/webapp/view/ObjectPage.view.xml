@@ -134,7 +134,7 @@
 										</f:FormElement>
 										<f:FormElement label="{i18n>testNumberLbl}" visible="{/isAdmin/isAdmin}">
 											<f:fields>
-												<m:Input value="{ticket}" visible="{configModel>/editMode}" />
+												<m:Input value="{ticket}" visible="{configModel>/editMode}" type="Number"/>
 												<m:Text text="{= ${ticket} || ${i18n>defaultTicketValue} }" visible="{= !${configModel>/editMode}}" />
 											</f:fields>
 										</f:FormElement>
@@ -164,7 +164,11 @@
 				</subSections>
 			</ObjectPageSection>
 			
-			<ObjectPageSection titleUppercase="false" id="Employment" title="{i18n>testTtl}">
+			<ObjectPageSection 
+				titleUppercase="false" 
+				id="Employment" 
+				title="{i18n>testTtl}"
+				visible="{= !${isAdmin}}">
 				<subSections>
 					<ObjectPageSubSection>
 						<m:NavContainer id="wizardNavContainer" height="30em">
@@ -172,7 +176,18 @@
 								<m:Page id="wizardBranchingReviewPage" showHeader="false">
 									<m:content>
 										<m:VBox>
-											<m:Button text="Пройти аттестацию!" press="onStartTest" width="100%"/>
+											<m:MessageStrip
+												text="{i18n>messageStripText}"
+												type="Warning"
+												showIcon="true"
+												visible="{= 1 > ${ticket}}"
+												class="sapUiMediumMarginBottom">
+											</m:MessageStrip>
+											<m:Button 
+												text="{i18n>doTestBtn}" 
+												enabled="{= ${ticket} > 0}" 
+												press="onStartTestConfirmation" 
+												width="100%"/>
 										</m:VBox>
 									</m:content>
 								</m:Page>

@@ -33,9 +33,8 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "sap/ui/Device"], function (JSONMo
                 editMode: false,
 
                 authData: {
-                    name: "",
                     secondName: "",
-                    thirdName: ""
+                    mobilePhone: ""
                 },
             
                 newUserData: {
