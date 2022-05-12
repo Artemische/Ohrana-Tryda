@@ -20,7 +20,12 @@
                 <Input value="{configModel>/authData/secondName}"/>
 
                 <Label text="{i18n>loginMobileLabel}" required="true"/>
-                <Input value="{configModel>/authData/mobilePhone}"/>
+                <MaskInput 
+                    mask="(99) 999 9999" 
+                    placeholderSymbol="_" 
+                    placeholder="{i18n>mobilePlaceholder}" 
+                    showClearIcon="true" 
+                    value="{configModel>/authData/mobilePhone}"/>
             </f:content>
         </f:SimpleForm>
         <buttons>
