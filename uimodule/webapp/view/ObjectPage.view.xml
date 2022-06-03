@@ -195,92 +195,33 @@
 									id="wizardContentPage"
 									showHeader="false">
 									<m:content>
-										<m:Wizard id="ShoppingCartWizard"
-											enableBranching="true"
-											renderMode="Page"
-											showNextButton="false"
-											class="sapUiResponsivePadding--header sapUiResponsivePadding--content">
-											<m:WizardStep
-												id="ContentsStep"
-												nextStep="PaymentTypeStep">
-												<m:VBox>
-													<m:Text class="sapUiSmallMarginBottom"
-															text="Что самое главное в охране труда?"/>
-													<m:RadioButtonGroup id="rbgResultId" columns="1">
-														<m:RadioButton text="Безопасность"/>
-														<m:RadioButton text="Правила"/>
-														<m:RadioButton text="Соблюдения закона"/>
-														<m:RadioButton text="Всё перечисленное"/>
-													</m:RadioButtonGroup>
-													<m:Button text="Следующий" press="onNextStep"/>
-												</m:VBox>
-											</m:WizardStep>
-											<m:WizardStep
-												id="PaymentTypeStep"
-												nextStep="CreditCardStep">
-												<m:VBox>
-													<m:Text class="sapUiSmallMarginBottom"
-															text="Что самое главное в охране труда?"/>
-													<m:RadioButtonGroup id="rbgResgultId" columns="1">
-														<m:RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-													</m:RadioButtonGroup>
-													<m:Button text="Следующий" press="onNextStep"/>
-												</m:VBox>
-											</m:WizardStep>
-											<m:WizardStep
-												id="CreditCardStep"
-												nextStep="BankAccountStep">
-												<m:VBox>
-													<m:Text class="sapUiSmallMarginBottom"
-															text="Что самое главное в охране труда?"/>
-													<m:RadioButtonGroup id="rbgResultaId" columns="1">
-														<m:RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-													</m:RadioButtonGroup>
-													<m:Button text="Следующий" press="onNextStep"/>
-												</m:VBox>
-											</m:WizardStep>
-											<m:WizardStep
-												id="BankAccountStep"
-												nextStep="CashOnDeliveryStep">
-												<m:VBox>
-													<m:Text class="sapUiSmallMarginBottom"
-															text="Что самое главное в охране труда?"/>
-													<m:RadioButtonGroup id="rbgRddesultId" columns="1">
-														<m:RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-													</m:RadioButtonGroup>
-													<m:Button text="Следующий" press="onNextStep"/>
-												</m:VBox>
-											</m:WizardStep>
-											<m:WizardStep
-												id="CashOnDeliveryStep">
-												<m:VBox>
-													<m:Text class="sapUiSmallMarginBottom"
-															text="Что самое главное в охране труда?"/>
-													<m:RadioButtonGroup id="rbgResdultId" columns="1">
-														<m:RadioButton text="{i18n>rbFailResult}" selected="{= !${configModel>/newUserData/isAttestationPassed}}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-														<m:RadioButton text="{i18n>rbSuccessResult}" selected="{configModel>/newUserData/isAttestationPassed}"/>
-													</m:RadioButtonGroup>
-													<m:Button text="Показать результат" press="onCompleteTest"/>
-												</m:VBox>
-											</m:WizardStep>
+										<m:Wizard id="atestationWizard"				
+											class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+											steps="{/Questions}"
+											showNextButton="false">
+											<m:steps>
+												<m:WizardStep title="{question}" >
+													<m:VBox>
+														<m:RadioButtonGroup buttons="{answers}" columns="1">
+															<m:RadioButton text="{answer}"/>
+														</m:RadioButtonGroup>
+														<m:Button visible="{= ${numberInTicket} !== 5}" 
+															text="Следующий вопрос"
+															press="onNextStep" />
+														<m:Button visible="{= ${numberInTicket} === 5}"
+															text="Завершить"
+															press="onCompleteTest" />
+													</m:VBox>
+												</m:WizardStep>
+											</m:steps>
 										</m:Wizard>
 									</m:content>
 								</m:Page>
 								<m:Page id="reviewResults" showHeader="false">
 									<m:content>
-										<m:VBox>
-											<m:Text text="Результаты аттестации" textAlign="Center" width="100%"/>
+										<m:VBox >
+											<m:Text text="Результат: " />
+											<m:ObjectStatus text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" state="{= ${isAttestationPassed} ? 'Success': 'Error'}" />
 										</m:VBox>
 									</m:content>
 								</m:Page>
