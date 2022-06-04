@@ -31,6 +31,17 @@ sap.ui.define([
         },
 
         navigateToTheListReport() {
+            if (this.getModel("configModel").getProperty("/testStarted")) {
+                const oDate = new Date();
+                const sAttestationDate = `${oDate.getDate()}.${oDate.getMonth()}.${oDate.getFullYear()}`;
+
+                this.byId("atestationWizard").discardProgress(this.byId("atestationWizard").getSteps()[0]);
+                this.getModel().setProperty(`${this.getView().getBindingContext().getPath()}/isAttestationPassed`, false);
+                this.getModel().setProperty(`${this.getView().getBindingContext().getPath()}/lastAttestationDate`, sAttestationDate);
+                this.onFooterActionPress(null, null);
+                this.getModel("configModel").setProperty("/testStarted", false);
+            }
+
             this.getRouter().navTo("RouteMainView");
         },
 
@@ -149,6 +160,7 @@ sap.ui.define([
             this.getModel().setProperty("/Questions", 
                 aTickets.filter(ticket => ticket.ticketId == iTicketNumber).sort((a, b) => a.numberInTicket - b.numberInTicket)
             );
+            this.getModel("configModel").setProperty("/testStarted", true);
             this.byId("wizardNavContainer").to(this.byId("wizardContentPage"));
         },
 
@@ -174,8 +186,9 @@ sap.ui.define([
 
             this.getModel().setProperty(`${this.getView().getBindingContext().getPath()}/isAttestationPassed`, bResult);
             this.getModel().setProperty(`${this.getView().getBindingContext().getPath()}/lastAttestationDate`, sAttestationDate);
+            
             this.onFooterActionPress(null, null);
-            this.byId("atestationWizard").getSteps()[0].getContent()[0].getItems()[0].getSelectedButton().getBindingContext().getObject().isCorrect
+            this.getModel("configModel").setProperty("/testStarted", false);
             this.byId("wizardNavContainer").to(this.byId("reviewResults"));
         },
 
