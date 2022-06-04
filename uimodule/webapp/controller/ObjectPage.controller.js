@@ -152,6 +152,16 @@ sap.ui.define([
             this.byId("wizardNavContainer").to(this.byId("wizardContentPage"));
         },
 
+        async onStartTestAgain() {
+            const iTicketNumber = +this.getView().getBindingContext().getObject().ticket;
+            const aTickets = await this.readBaseRequest("Questions/");
+            
+            this.getModel().setProperty("/Questions", 
+                aTickets.filter(ticket => ticket.ticketId == iTicketNumber).sort((a, b) => a.numberInTicket - b.numberInTicket)
+            );
+            this.byId("wizardNavContainer").to(this.byId("wizardContentPage"));
+        },
+
         onNextStep() {
             this.byId("container-ohranaTryda---pageOP--atestationWizard").nextStep();
         },
@@ -159,13 +169,26 @@ sap.ui.define([
         onCompleteTest() {
             const aResults = this.byId("atestationWizard").getSteps().map(step => step.getContent()[0].getItems()[0].getSelectedButton().getBindingContext().getObject().isCorrect);
             const bResult = aResults.filter(el => el).length >= 4;
+            const oDate = new Date();
+            const sAttestationDate = `${oDate.getDate()}.${oDate.getMonth()}.${oDate.getFullYear()}`;
 
             this.getModel().setProperty(`${this.getView().getBindingContext().getPath()}/isAttestationPassed`, bResult);
+            this.getModel().setProperty(`${this.getView().getBindingContext().getPath()}/lastAttestationDate`, sAttestationDate);
             this.onFooterActionPress(null, null);
             this.byId("atestationWizard").getSteps()[0].getContent()[0].getItems()[0].getSelectedButton().getBindingContext().getObject().isCorrect
             this.byId("wizardNavContainer").to(this.byId("reviewResults"));
-            
         },
+
+        onExit() {
+            this._logoutCurrentUser();
+            this.navigateToTheListReport();
+        },
+
+        _logoutCurrentUser() {
+            this.getModel().setProperty("/ActiveUser", {});
+            this.getModel().setProperty("/AvailableUsers", []);
+            sessionStorage.removeItem("ActiveUserMobile");
+        }
 
     });
 });

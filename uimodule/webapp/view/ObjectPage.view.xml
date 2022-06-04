@@ -219,10 +219,20 @@
 								</m:Page>
 								<m:Page id="reviewResults" showHeader="false">
 									<m:content>
-										<m:VBox >
-											<m:Text text="Результат: " />
-											<m:ObjectStatus text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" state="{= ${isAttestationPassed} ? 'Success': 'Error'}" />
-										</m:VBox>
+										<m:ObjectStatus title="Результат" text="{= ${isAttestationPassed} ? 'Сдано': 'Не сдано'}" state="{= ${isAttestationPassed} ? 'Success': 'Error'}" />
+										<m:Button 
+											text="{i18n>doTestAgainBtn}" 
+											enabled="{= ${ticket} > 0}" 
+											press="onStartTestAgain" 
+											width="100%"
+											class="sapUiSmallMarginTop" 
+											visible="{= !${isAttestationPassed}}"/>
+										<m:Button 
+											text="{i18n>exit}"
+											press="onExit" 
+											width="100%"
+											class="sapUiSmallMarginTop" 
+											visible="{isAttestationPassed}"/>
 									</m:content>
 								</m:Page>
 							</m:pages>
